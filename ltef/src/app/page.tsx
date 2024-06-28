@@ -1,10 +1,12 @@
 import React from 'react';
-import Signup from './components/authentication';
+import CreateUser from './components/signup';
+import UserList from './components/getUser';
 
 const App: React.FC = () => {
   return (
     <div>
-      <Signup />
+      <CreateUser />
+      <UserList />
     </div>
   );
 };
