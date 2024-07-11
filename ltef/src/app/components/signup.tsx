@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { AIRTABLE_API_URL, AIRTABLE_API_TOKEN } from '../../config';
+import TextField from '@mui/material/TextField';
 
 const CreateUser = () => {
   const [GivenName, setGivenName] = useState('');
@@ -44,8 +45,9 @@ const CreateUser = () => {
         {message && <p>{message}</p>}
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="givenName">Given name:</label>
-            <input
+            <TextField
+              label="Given Name"
+              variant="outlined"
               type="text"
               id="name"
               value={GivenName}
