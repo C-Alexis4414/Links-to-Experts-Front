@@ -56,8 +56,9 @@ const CreateUser = () => {
             />
           </div>
           <div>
-            <label htmlFor="surname">Surname:</label>
-            <input
+            <TextField
+            label="Surname"
+              variant="outlined"
               type="text"
               id="surname"
               value={Surname}
@@ -66,18 +67,20 @@ const CreateUser = () => {
             />
           </div>
           <div>
-            <label htmlFor="Username">Username:</label>
-            <input
+            <TextField
+              label="Username"
+              variant='outlined'
               type="text"
-              id="name"
+              id="username"
               value={Username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="email">Email:</label>
-            <input
+            <TextField
+              label="Email"
+              variant='outlined'
               type="email"
               id="email"
               value={EmailAddress}
@@ -86,8 +89,9 @@ const CreateUser = () => {
             />
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
-            <input
+            <TextField
+              label="Password"
+              variant='outlined'
               type="password"
               id="password"
               value={password}

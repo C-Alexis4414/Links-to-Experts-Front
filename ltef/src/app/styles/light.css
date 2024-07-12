@@ -1,6 +1,6 @@
 .light {
-  --md-sys-color-primary: rgb(165 0 0);
-  --md-sys-color-surface-tint: rgb(192 0 0);
+  --md-sys-color-primary: rgb(165, 0, 0);
+  --md-sys-color-surface-tint: rgb(192, 0, 0);
   --md-sys-color-on-primary: rgb(255 255 255);
   --md-sys-color-primary-container: rgb(235 0 0);
   --md-sys-color-on-primary-container: rgb(255 255 255);
