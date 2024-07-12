@@ -48,6 +48,8 @@ const CreateUser = () => {
             <TextField
               label="Given Name"
               variant="outlined"
+              margin='dense'
+              focused
               type="text"
               id="name"
               value={GivenName}
@@ -57,8 +59,10 @@ const CreateUser = () => {
           </div>
           <div>
             <TextField
-            label="Surname"
+              label="Surname"
               variant="outlined"
+              margin='dense'
+              focused
               type="text"
               id="surname"
               value={Surname}
@@ -70,6 +74,8 @@ const CreateUser = () => {
             <TextField
               label="Username"
               variant='outlined'
+              margin='dense'
+              focused
               type="text"
               id="username"
               value={Username}
@@ -81,6 +87,8 @@ const CreateUser = () => {
             <TextField
               label="Email"
               variant='outlined'
+              margin='dense'
+              focused
               type="email"
               id="email"
               value={EmailAddress}
@@ -92,6 +100,8 @@ const CreateUser = () => {
             <TextField
               label="Password"
               variant='outlined'
+              margin='dense'
+              focused
               type="password"
               id="password"
               value={password}
@@ -100,8 +110,11 @@ const CreateUser = () => {
             />
           </div>
           <div>
-            <label htmlFor="youtuber">Youtubeur:</label>
-            <input
+            <TextField
+              label="Youtuber"
+              variant='outlined'
+              margin='dense'
+              focused
               type="url"
               id="youtuber"
               value={isYoutuber}
@@ -110,8 +123,11 @@ const CreateUser = () => {
             />
           </div>
           <div>
-            <label htmlFor="pro">Linkedin:</label>
-            <input
+            <TextField
+              label="Pro"
+              variant='outlined'
+              margin='dense'
+              focused
               type="url"
               id="pro"
               value={isPro}
