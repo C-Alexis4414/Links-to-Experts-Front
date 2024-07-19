@@ -8,12 +8,13 @@ import UserSearchName from './components2/getNameUser';
 const App: React.FC = () => {
   return (
     <>
-      {/* <CreateUser /> */}
+      {/* <CreateUser />
+      <UserList />
       <UserSearchName />
       <UserSearchComponent />
-      <AllUsers />
+      <AllUsers /> */}
 
-      {/* <UserList /> */}
+
     </>
   );
 };
