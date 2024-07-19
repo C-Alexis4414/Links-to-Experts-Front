@@ -15,29 +15,29 @@ const CreateUser = () => {
 
   const [message, setMessage] = useState<string | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            const newUser = { GivenName: GivenName, Surname:Surname, Username:Username, EmailAddress: EmailAddress, password: password, isYoutuber: isYoutuber, isPro: isPro};
-            const response = await axios.post(
-                `${AIRTABLE_API_URL}`,
-                {
-                    fields: newUser,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-            setMessage('User created successfully!');
-            console.log(response.data);
-        } catch (error) {
-            setMessage('Failed to create user');
-            console.error(error);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const newUser = { GivenName: GivenName, Surname: Surname, Username: Username, EmailAddress: EmailAddress, password: password, isYoutuber: isYoutuber, isPro: isPro };
+      const response = await axios.post(
+        `${AIRTABLE_API_URL}`,
+        {
+          fields: newUser,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
         }
-    };
+      );
+      setMessage('User created successfully!');
+      console.log(response.data);
+    } catch (error) {
+      setMessage('Failed to create user');
+      console.error(error);
+    }
+  };
 
     return (
       <div>
