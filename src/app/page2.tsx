@@ -36,8 +36,8 @@
 // src/App.tsx
 
 import React from 'react';
-import UserList from './component/Userlist';
-import CreateUser from './component/CreateUserList';
+import UserList from '../app/components/Userlist';
+import CreateUser from './components/CreateUserList';
 
 const App: React.FC = () => {
   return (

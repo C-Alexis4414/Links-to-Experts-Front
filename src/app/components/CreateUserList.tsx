@@ -2,7 +2,7 @@
 'use client'
 import React, { useState } from 'react';
 import axios from 'axios';
-import { AIRTABLE_API_URL, AIRTABLE_API_KEY } from '../../../config';
+import { AIRTABLE_API_URL, AIRTABLE_API_TOKEN } from '../../../src/config';
 
 interface NewUser {
     GivenName: string;
@@ -45,7 +45,7 @@ const CreateUser: React.FC = () => {
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+                        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`,
                         'Content-Type': 'application/json',
                     },
                 }

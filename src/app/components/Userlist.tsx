@@ -2,7 +2,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { AIRTABLE_API_URL, AIRTABLE_API_KEY } from '../../../config';
+import { AIRTABLE_API_URL, AIRTABLE_API_TOKEN } from '../../config';
 
 interface User {
     id: string;
@@ -29,7 +29,7 @@ const UserList: React.FC = () => {
             try {
                 const response = await axios.get(`${AIRTABLE_API_URL}`, {
                     headers: {
-                        Authorization: `Bearer ${AIRTABLE_API_KEY}`
+                        Authorization: `Bearer ${AIRTABLE_API_TOKEN}`
                     }
                 });
                 console.log(response);
