@@ -34,3 +34,6 @@ config.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# extension vsCode
+.vscode
