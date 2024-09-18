@@ -1,12 +1,13 @@
 import React from 'react';
-import CreateUser from './components/signup';
-import UserList from './components/getUser';
+import Navbar from './components/navbar';
+import UserCard from './pages/users/[card]';
 
 const App: React.FC = () => {
   return (
     <div>
-      <CreateUser />
-      <UserList />
+      <Navbar />
+      <UserCard/>
+      single page application
     </div>
   );
 };
