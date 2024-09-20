@@ -1,12 +1,18 @@
 import React from 'react';
-import CreateUser from './components/signup';
-import UserList from './components/getUser';
+import Navbar from './components/navbar';
+import HomePage from './homePage/page';
+
+/**
+ * 
+ * @returns single page root, elle affiche par défault la page de connexion à l'application:
+ */
+
 
 const App: React.FC = () => {
   return (
     <div>
-      <CreateUser />
-      <UserList />
+      <Navbar />
+      <HomePage />
     </div>
   );
 };
