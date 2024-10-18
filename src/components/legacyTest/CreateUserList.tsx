@@ -2,7 +2,7 @@
 'use client'
 import React, { useState } from 'react';
 import axios from 'axios';
-import { AIRTABLE_API_URL, AIRTABLE_API_TOKEN } from '../../../src/config';
+import { AIRTABLE_API_URL, AIRTABLE_API_TOKEN } from '../../config';
 
 interface NewUser {
     GivenName: string;
