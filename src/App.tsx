@@ -1,14 +1,13 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './homePage/page';
+import RootLayout from './layout';
+import Navbar from './components/navbar';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/homePage" element={<HomePage />} />
-      </Routes>
-    </BrowserRouter>
+    <RootLayout>
+      <Navbar />
+      <HomePage />
+    </RootLayout>
   );
 }
 
