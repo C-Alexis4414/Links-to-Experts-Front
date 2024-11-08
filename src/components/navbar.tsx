@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Avatar from '@mui/material/Avatar';
 import { Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+// import MenuItemLink from './menuItemLink';
 
 const settings = ['Profile', 'Dashboard', 'Logout'];
 
@@ -45,8 +46,8 @@ function Navbar() {
           >
             <SettingsIcon />
           </IconButton>
-
-          <Box sx={{ flexGrow: 0 }}>
+          
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar alt="profile picture" src="" />
@@ -68,13 +69,13 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+              {settings.map((navigation) => (
+                <MenuItem key={navigation} onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>{navigation}</Typography>
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
     </Box >
