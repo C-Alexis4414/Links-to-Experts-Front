@@ -1,16 +1,15 @@
 'use client'
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Avatar from '@mui/material/Avatar';
-import { Menu, MenuItem, Tooltip, Typography } from '@mui/material';
-// import MenuItemLink from './menuItemLink';
+import { AppBar, Box, Toolbar, IconButton, Avatar, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
-const settings = ['Profile', 'Dashboard', 'Logout'];
+const navItem = [
+  {path:'/login', label:'Sign in'}, 
+  {path:'/register', label:'Sign up'}, 
+  {path:'/', label:'Home'},
+];
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -46,8 +45,8 @@ function Navbar() {
           >
             <SettingsIcon />
           </IconButton>
-          
-          {/* <Box sx={{ flexGrow: 0 }}>
+
+          <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar alt="profile picture" src="" />
@@ -69,13 +68,13 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((navigation) => (
-                <MenuItem key={navigation} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{navigation}</Typography>
+              {navItem.map((item) => (
+                <MenuItem key={item.path} onClick={handleCloseUserMenu} component={NavLink} to={item.path}>
+                    <Typography sx={{ textAlign: 'center' }}>{item.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
-          </Box> */}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box >

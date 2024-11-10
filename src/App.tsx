@@ -15,8 +15,8 @@ function App() {
   // );
   return (
   <RootLayout>
-    <Navbar />
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={ <HomePage />} />
         <Route path="login" element={<Login />} />
