@@ -1,15 +1,7 @@
-ci/cd:
+taskManagement/ci/cd:
 - changed-files:
-  - any-glob-to-any-files: .github/*
+  - any-glob-to-any-file: '.github/**'
 
-tables:
+Documentation:
 - changed-files:
-  - any-glob-to-any-files: prisma/*
-
-crud:
-- changed-files:
-  - any-glob-to-any-files: src/*
-
-tests:
-- changed-files:
-  - any-glob-to-any-files: test/*
+  - any-glob-to-any-file: '**/*.md'
