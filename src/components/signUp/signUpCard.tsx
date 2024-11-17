@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosConfig';
-import { useNavigate } from 'react-router-dom';
-import { Box, Card, CardContent, Typography, TextField, Button, Switch, FormControlLabel, CircularProgress } from '@mui/material';
+import {  useNavigate } from 'react-router-dom';
+import { Box, Card, CardContent, Typography, TextField, Button, Switch, FormControlLabel, CircularProgress, FormGroup } from '@mui/material';
 import Grid from '@mui/material/Grid2';
+import { useForm } from 'react-hook-form';
+import { FormValues } from '@/types/FormValues';
+
 
 export default function SignUpCard() {
-  const [formData, setFormData] = useState({
-    userName: '',
-    email: '',
-    password: '',
-    is_Youtuber: false,
-    is_Professional: false,
-    tagChannel: '',
-    urlLinkedin: '',
-  });
   const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const form = useForm<FormValues>();
+  const values = form.watch();
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    form.setValue(name, value);
   };
 
   const handleConfirmPasswordChange = (e) => {
@@ -30,29 +27,24 @@ export default function SignUpCard() {
 
   const handleSwitchChange = (e) => {
     const { name, checked } = e.target;
-  
-    setFormData((prevState) => {
-      const updatedState = { ...prevState, [name]: checked };
-  
-      // Réinitialiser les champs conditionnels si le switch est désactivé
-      if (name === 'is_Youtuber' && !checked) {
-        updatedState.tagChannel = '';
+    if (name === 'is_Youtuber') {
+        form.setValue('user.is_Youtuber', checked);
+      } else if (name === 'is_Professional') {
+        form.setValue('user.is_Professional', checked);
       }
-      if (name === 'is_Professional' && !checked) {
-        updatedState.urlLinkedin = '';
-      }
-  
-      return updatedState;
-    });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setErrorMessage('');
-
+    if (values?.user?.password !== confirmPassword) {
+        setErrorMessage('Les mots de passe ne correspondent pas.');
+        setLoading(false);
+        return;
+      }
     try {
-      const response = await axiosInstance.post('/authentication/signup', formData);
+      const response = await axiosInstance.post('/authentication/signup', values);
       if (response.status === 201 || response.status === 200) {
         alert('Inscription réussie !');
         console.log(response.data);
@@ -67,6 +59,10 @@ export default function SignUpCard() {
       setLoading(false);
     }
   };
+
+
+    useEffect((
+    ) => {console.log(values); },[values])
 
   return (
     <Box
@@ -99,23 +95,10 @@ export default function SignUpCard() {
                         fullWidth
                         label="Nom d'utilisateur"
                         name="userName"
-                        value={formData.userName}
+                        value={values?.user?.userName}
                         onChange={handleInputChange}
                         required
-                        sx={{
-                            backgroundColor: 'white',
-                            '& .MuiOutlinedInput-root': {
-                              '& fieldset': {
-                                borderColor: 'red', // Couleur du contour
-                              },
-                              '&:hover fieldset': {
-                                borderColor: 'darkred', // Couleur au survol
-                              },
-                              '&.Mui-focused fieldset': {
-                                borderColor: 'crimson', // Couleur lors du focus
-                              },
-                            },
-                          }}
+                        
                     />
                 </Grid>
                 <Grid size={12}>
@@ -124,23 +107,10 @@ export default function SignUpCard() {
                         label="Adresse Email"
                         name="email"
                         type="email"
-                        value={formData.email}
+                        value={values?.user?.email}
                         onChange={handleInputChange}
                         required
-                        sx={{
-                            backgroundColor: 'white',
-                            '& .MuiOutlinedInput-root': {
-                              '& fieldset': {
-                                borderColor: 'red', // Couleur du contour
-                              },
-                              '&:hover fieldset': {
-                                borderColor: 'darkred', // Couleur au survol
-                              },
-                              '&.Mui-focused fieldset': {
-                                borderColor: 'crimson', // Couleur lors du focus
-                              },
-                            },
-                          }}
+                        
                     />
                 </Grid>
                 <Grid size={12}>
@@ -149,23 +119,10 @@ export default function SignUpCard() {
                         label="Mot de passe"
                         name="password"
                         type="password"
-                        value={formData.password}
+                        value={values?.user?.password}
                         onChange={handleInputChange}
                         required
-                        sx={{
-                            backgroundColor: 'white',
-                            '& .MuiOutlinedInput-root': {
-                              '& fieldset': {
-                                borderColor: 'red', // Couleur du contour
-                              },
-                              '&:hover fieldset': {
-                                borderColor: 'darkred', // Couleur au survol
-                              },
-                              '&.Mui-focused fieldset': {
-                                borderColor: 'crimson', // Couleur lors du focus
-                              },
-                            },
-                          }}
+                        
                     />
                 </Grid>
                 <Grid size={12}>
@@ -177,91 +134,48 @@ export default function SignUpCard() {
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                         required
-                        sx={{
-                            backgroundColor: 'white',
-                            '& .MuiOutlinedInput-root': {
-                            //   '& fieldset': {
-                            //     borderColor: 'red', // Couleur du contour
-                            //   },
-                              '&:hover fieldset': {
-                                borderColor: 'darkred', // Couleur au survol
-                              },
-                              '&.Mui-focused fieldset': {
-                                borderColor: 'crimson', // Couleur lors du focus
-                              },
-                            },
-                          }}
+                        
                     />
                 </Grid>
             </Grid>
+            <FormGroup>
             <FormControlLabel
               control={
                 <Switch
-                  checked={formData.is_Youtuber}
+                  checked={values?.user?.is_Youtuber ?? false }
                   onChange={handleSwitchChange}
                   name="is_Youtuber"
                 />
               }
               label="Êtes-vous YouTuber ?"
             />
-            {formData.is_Youtuber && (
+            {values?.user?.is_Youtuber && (
               <TextField
                 fullWidth
-                margin="normal"
                 label="Tag de votre chaîne YouTube"
                 name="tagChannel"
-                value={formData.tagChannel}
+                value={values?.user?.tagChannel }
                 onChange={handleInputChange}
-                required
-                sx={{
-                    backgroundColor: 'white',
-                    '& .MuiOutlinedInput-root': {
-                    //   '& fieldset': {
-                    //     borderColor: 'red', // Couleur du contour
-                    //   },
-                      '&:hover fieldset': {
-                        borderColor: 'darkred', // Couleur au survol
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'crimson', // Couleur lors du focus
-                      },
-                    },
-                  }}
               />
             )}
             <FormControlLabel
               control={
                 <Switch
-                  checked={formData.is_Professional}
+                  checked={values?.user?.is_Professional ?? false }
                   onChange={handleSwitchChange}
                   name="is_Professional"
                 />
               }
               label="Êtes-vous sur LinkedIn ?"
             />
-            {formData.is_Professional && (
+            </FormGroup>
+            {values?.user?.is_Professional && (
               <TextField
                 fullWidth
-                margin="normal"
                 label="URL LinkedIn"
                 name="urlLinkedin"
-                value={formData.urlLinkedin}
+                value={values?.user?.urlLinkedin}
                 onChange={handleInputChange}
-                required
-                sx={{
-                    backgroundColor: 'white',
-                    '& .MuiOutlinedInput-root': {
-                    //   '& fieldset': {
-                    //     borderColor: 'red', // Couleur du contour
-                    //   },
-                      '&:hover fieldset': {
-                        borderColor: 'darkred', // Couleur au survol
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'crimson', // Couleur lors du focus
-                      },
-                    },
-                  }}
               />
             )}
             {errorMessage && (
