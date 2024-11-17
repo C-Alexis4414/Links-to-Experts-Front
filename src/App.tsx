@@ -5,14 +5,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
+import  Grid  from '@mui/material/Grid2';
 
 function App() {
-  // return (
-  //   <RootLayout>
-  //     <Navbar />
-  //     <HomePage />
-  //   </RootLayout>
-  // );
   return (
   <RootLayout>
     <BrowserRouter>

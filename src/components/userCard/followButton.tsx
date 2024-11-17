@@ -7,7 +7,6 @@ const FollowButton: React.FC = () => {
             sx={{
                 borderRadius: '50px',
                 backgroundColor: '#31111d',
-                position: 'absolute',
                 right: 0,
                 top: 0,
                 width: 75,

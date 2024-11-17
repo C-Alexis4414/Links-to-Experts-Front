@@ -29,6 +29,16 @@ const theme = createTheme({
             contrastText: 'rgb(255 255 255)',
         },
     },
+    typography: {
+        subtitle1: {
+          fontSize: '36px',
+          fontWeight: 700,
+        },
+        subtitle2:{
+            fontSize: '14px',
+            fontWeight: 300,
+        },
+      },
     components: {
         MuiOutlinedInput: {
             styleOverrides: {
