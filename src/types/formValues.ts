@@ -1,5 +1,5 @@
 export type FormValues={
-    user: UserFields
+    user?: UserFields | null
 }
 
 export type UserFields = {
