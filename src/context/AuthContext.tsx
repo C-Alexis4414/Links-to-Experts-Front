@@ -1,32 +1,60 @@
-import React, { createContext, useState, ReactNode, useContext } from 'react';
+import axiosInstance from '../utils/axiosInstance';
+import React, { createContext, useState, ReactNode, useContext, useEffect } from 'react';
 
 interface AuthContextProps {
-    user: any;
-    token: string | null;
-    login: (token: string, user: any) => void;
-    logout: () => void;
+    user: any | null;
+    isLoading: boolean;
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<any>(null);
-    const [token, setToken] = useState<string | null>(null);
+    const user = useState<any | null>(null); // setUser in array
+    const [isLoading] = useState(true); // setIsLoading in array
 
-    const login = (token: string, user: any) => {
-        setToken(token);
-        setUser(user);
-        localStorage.setItem('token', token);
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         try {
+    //             const { data } = await axiosInstance.get('/authentication/protected');
+    //             setUser(data);
+    //         } catch (error) {
+    //             console.error("This route is not protected");
+    //             setUser(null);
+    //         }
+    //         finally {
+    //             setIsLoading(false);
+    //         }
+    //     };
+
+    //     if (!user && isLoading) {
+    //         fetchUser();
+    //     }
+    // }, [user, isLoading]);
+
+    const login = async (email: string, password: string) => {
+        try {
+            await axiosInstance.post('/authentication/login', { email, password });
+            // const { data } = await axiosInstance.get('/authentication/protected');
+            // setUser(data);
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     };
 
-    const logout = () => {
-        setToken(null);
-        setUser(null);
-        localStorage.removeItem('token');
+    const logout = async () => {
+        try {
+            await axiosInstance.post('/authentication/logout');
+            // setUser(null);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, login, logout }}>
+        <AuthContext.Provider value={{ user, isLoading, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

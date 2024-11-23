@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-// import { useAuth } from '../../context/AuthContext';
-import axiosInstance from '../../utils/axiosInstance';
+import { useAuth } from '../../context/AuthContext';
 import { Box, Card, TextField, Button, Typography, CardContent } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import { useNavigate } from 'react-router-dom';
 
 const loginCard = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
-    // const { login } = useAuth();
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post("/authentication/login", { email, password });
-            // const { token, user } = response.data;
-            console.log(response.data);
-            // login(token, user);
+            await login(email, password);
+            // navigate("/profile");
         } catch (err) {
-            // setError("Invalid credentials");
+            setError("Invalid credentials");
             console.log(err);
         }
     };
@@ -90,22 +89,7 @@ const loginCard = () => {
                                 Se connecter
                             </Button>
                         </Grid>
-                {/* <form onSubmit={handleSubmit}>
-                    <input 
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                    />
-                    <input 
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                    />
-                    <button type="submit">Login</button>
-                </form>
-                {error && <p>{error}</p>} */}
+                        {error && <p>{error}</p>}
                     </Grid>
                 </CardContent>
             </Card>

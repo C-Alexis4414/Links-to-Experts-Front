@@ -1,33 +1,29 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const axiosInstance = axios.create({
     baseURL: "http://localhost:3000",
     withCredentials: true,
-    headers: {
-        "Content-Type": "application/json",
-        Accept: 'application/json',
-    },
+    // headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: 'application/json',
+    // },
 });
 
-// axiosInstance.interceptors.request.use(
-//     (config) => {
-//         const token = localStorage.getItem("accessToken");
-//         if (token) {
-//             config.headers["Authorization"] = `Bearer ${token}`;
-//         }
-//         return config;
-//     },
-//     (error) => {
-//         return Promise.reject(error);
-//     }
-// );
+const navigate = useNavigate();
 
 axiosInstance.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error) => {
         if (error.response?.status === 401) {
-            localStorage.removeItem("acessToken");
-            window.location.href = "/login";
+            console.warn("Unauthorized, attempting to refresh token");
+            try {
+                await axiosInstance.post("/authentication/refresh");
+                return axiosInstance.request(error.config);
+            } catch (err) {
+                console.error("Failed to refresh token", err);
+                navigate("/login");
+            }
         }
         return Promise.reject(error);
     }
