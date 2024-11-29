@@ -1,10 +1,11 @@
 import React from 'react';
-import { useAuth } from '../context/authContext'; // Assurez-vous que le chemin est correct
+import { useAuth } from '../context/AuthContext'; // Assurez-vous que le chemin est correct
 import { useNavigate } from 'react-router-dom'; // Utilisez react-router-dom pour la navigation
 
 interface GuardProps {
   children: React.ReactNode;
 }
+//
 
 // Guard pour les pages protégées
 export const Protected: React.FC<GuardProps> = ({ children }) => {

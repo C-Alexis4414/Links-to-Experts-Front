@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
-import { AuthProvider } from './context/authContext';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (

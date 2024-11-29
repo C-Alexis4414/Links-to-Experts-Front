@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../context/authContext'; // Assurez-vous que le chemin est correct
+import { useAuth } from '../context/AuthContext'; // Assurez-vous que le chemin est correct
 
 interface GuardProps {
     children: React.ReactNode;
