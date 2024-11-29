@@ -28,7 +28,7 @@ const refreshToken = async (): Promise<void> => {
     if (typeof window !== 'undefined') {
       // Récupère l'URL actuelle de la page (chemin, ex. '/login ou /homePage').
       const currentUrl = window.location.pathname;
-      if (currentUrl === '/login' || currentUrl === '/register') {
+      if (currentUrl === '/login' || currentUrl === '/register' || currentUrl === '/test') {
         throw error; // Si on est déjà sur la page de login ou register, on ne redirige pas.
       }
 

@@ -5,17 +5,24 @@ import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
 import { AppBar, Box, Toolbar, IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, ListItemIcon, ListItemText } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';  // Contexte pour l'authentification
+import HomeIcon from '@mui/icons-material/Home';
 
+enum NavAction {
+  LOGOUT = 'logout',
+  HOME = 'home',
+  LOGIN = 'login',
+  SIGNUP = 'signup',
+}
 const navItem = [
-  { path: '/login', label: 'Login' },
-  { path: '/register', label: 'Sign up' },
-  { path: '/', label: 'Home' },
-  { path: '/logout', label: 'Déconnexion', icon: <LogoutTwoToneIcon />, action: 'logout' },
+  { path: '/login', label: 'Login', action: NavAction.LOGIN },
+  { path: '/register', label: 'Sign up', action: NavAction.SIGNUP },
+  { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
+  { path: '/logout', label: 'Déconnexion', icon: <LogoutTwoToneIcon />, action: NavAction.LOGOUT },
 ];
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { logout } = useAuth();  // Utilisation du contexte pour la déconnexion
+  const { logout } = useAuth();  
   const navigate = useNavigate()
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -25,10 +32,29 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  const handleLogout = async () => {
-    await logout();  // Appel à la fonction de déconnexion du contexte
-    navigate("/")
-    handleCloseUserMenu();
+  const actionHandlers: Record<NavAction, () => void | Promise<void>> = {
+    [NavAction.LOGOUT]: async () => {
+      await logout();  
+      navigate('/');
+    },
+    [NavAction.HOME]: () => {
+      navigate('/');
+    },
+    [NavAction.LOGIN]: () => {
+      navigate('/login');
+    },
+    [NavAction.SIGNUP]: () => {
+      navigate('/register');
+    },
+  };
+
+  // Gestion de l'action dynamique en fonction de l'item
+  const handleNavAction = (action: NavAction) => {
+    const actionHandler = actionHandlers[action]; // Accède à la fonction associée à l'action
+    if (actionHandler) {
+      actionHandler();  // Appel de la fonction associée à l'action
+    }
+    handleCloseUserMenu();  // Fermer le menu après l'action
   };
 
   return (
@@ -83,14 +109,12 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {/* Création des éléments du menu avec leurs actions */}
               {navItem.map((item) => (
                 <MenuItem
-                  key={item.path}
-                  onClick={item.action === 'logout' ? handleLogout : handleCloseUserMenu}
-                  component={NavLink}
-                  to={item.path}
-                >
+                key={item.path}
+                onClick={() => handleNavAction(item.action)}
+                component="button" // Utilisation d'un bouton pour gérer les actions
+              >
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText>{item.label}</ListItemText>
                 </MenuItem>

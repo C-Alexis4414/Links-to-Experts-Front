@@ -44,34 +44,89 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          backgroundColor: 'white', // Fond du champ de texte
+          backgroundColor: 'white', 
         },
       },
       variants: [
         {
           props: { variant: 'outlined' },
           style: {
+            // Personnalisation des bordures et du fond
             '& .MuiOutlinedInput-root': {
-              backgroundColor: 'white', // Fond par défaut des champs de texte
+              backgroundColor: 'white', 
               '&:hover fieldset': {
-                borderColor: 'darkred', // Couleur du contour au survol
+                borderColor: '#7d5260', // Bordure au survol
               },
               '&.Mui-focused fieldset': {
-                borderColor: 'crimson', // Couleur du contour lorsqu'il est focus
+                border: '3px solid #341C1C'
               },
+            },
+            // Personnalisation du label
+            '& .MuiInputLabel-root': {
+              color: 'gray', // Couleur du label normal
+            },
+            '& .MuiInputLabel-shrink': {
+              color: '#7d5260', // Couleur du label lorsqu'il est shrinké (focus ou contenu)
+            },
+            // Personnalisation de la couleur du texte à l'intérieur du champ
+            '& .MuiOutlinedInput-input': {
+              color: 'black', // Couleur du texte
+            },
+          },
+        },
+      ],
+    },   
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+           border: '2px solid #341C1C'
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#7d5260', // Couleur de fond personnalisée de l'AppBar
+          color: '#fff0ee', // Couleur du texte de l'AppBar
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '20px', 
+          textTransform: 'none', 
+          fontWeight: 'bold', 
+          width: '150px',
+          fontSize: '16px',
+          color: 'white', 
+          backgroundColor: '#341C1C', 
+          '&:hover': {
+            backgroundColor: 'rgba(73, 57, 59, 0.9)', 
+          },
+        },
+      },
+      defaultProps: {
+        variant: 'contained', // Variante par défaut
+      },
+      variants: [
+        {
+          props: { variant: 'text' }, // Nom du variant
+          style: {
+            backgroundColor: '#f2eaf8', 
+            color: '#341C1C', 
+            border: '2px solid #341C1C', 
+            '&:hover': {
+              backgroundColor: '#e8d4f7', 
             },
           },
         },
       ],
     },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        notchedOutline: {
-          borderColor: 'rgb(149 109 103)', // Couleur du contour du champ de texte
-        },
-      },
-    },
+    
   },
 });
 
 export default theme;
+
+

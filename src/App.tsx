@@ -6,6 +6,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
 import { AuthProvider } from './context/AuthContext';
+import TestPage from './pages/testPage';
 
 function App() {
   return (
@@ -18,14 +19,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="*" element={<PageNotFound />} />
-            {/* <Route 
-              path="profile" 
-              element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-              }
-            /> */}
+            <Route path="/test" element={<TestPage />} />
           </Routes>
         </BrowserRouter>
       </RootLayout>
