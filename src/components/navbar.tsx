@@ -1,31 +1,22 @@
 import React, { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import CorporateFareTwoToneIcon from '@mui/icons-material/CorporateFareTwoTone';
-import EngineeringTwoToneIcon from '@mui/icons-material/EngineeringTwoTone';
 import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
 import { AppBar, Box, Toolbar, IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, ListItemIcon, ListItemText } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';  // Contexte pour l'authentification
 
-//toto
 const navItem = [
-  { path: '/login', label: 'Sign in' },
+  { path: '/login', label: 'Login' },
   { path: '/register', label: 'Sign up' },
   { path: '/', label: 'Home' },
-  { path: '/company', label: 'Mon entreprise', icon: <CorporateFareTwoToneIcon /> },
-  { path: '/employees', label: 'Mes collègues', icon: <EngineeringTwoToneIcon /> },
-  { path: '/user', label: 'Mon profil', icon: <AccountCircleTwoToneIcon /> },
-  { path: '/flow', label: 'Mes flux', icon: <AccountTreeTwoToneIcon /> },
   { path: '/logout', label: 'Déconnexion', icon: <LogoutTwoToneIcon />, action: 'logout' },
 ];
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { logout } = useAuth();  // Utilisation du contexte pour la déconnexion
-
+  const navigate = useNavigate()
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -34,10 +25,11 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  // const handleLogout = async () => {
-  //   await logout();  // Appel à la fonction de déconnexion du contexte
-  //   handleCloseUserMenu();
-  // };
+  const handleLogout = async () => {
+    await logout();  // Appel à la fonction de déconnexion du contexte
+    navigate("/")
+    handleCloseUserMenu();
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -95,7 +87,7 @@ function Navbar() {
               {navItem.map((item) => (
                 <MenuItem
                   key={item.path}
-                  // onClick={item.action === 'logout' ? handleLogout : handleCloseUserMenu}
+                  onClick={item.action === 'logout' ? handleLogout : handleCloseUserMenu}
                   component={NavLink}
                   to={item.path}
                 >

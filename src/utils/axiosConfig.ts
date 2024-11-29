@@ -12,10 +12,6 @@ declare module 'axios' {
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000', // Remplacez par l'URL de votre API
   withCredentials: true, // Permet l'envoi des cookies avec chaque requête
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
 });
 
 

@@ -26,7 +26,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // const navigate = useNavigate();
 
   const checkAuthentication = async () => {
-    console.log("Vérification de l'authentification...");
     try {
       setIsLoading(true);
       const response = await axiosInstance.get('/authentication/protected');
@@ -70,13 +69,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       console.error('Logout failed:', error);
     } finally {
       setIsLoading(false);
-      // navigate("/login")
     }
   };
 
   useEffect(() => {
     checkAuthentication();
-  }, []);
+    console.log(user)
+    console.log(isAuthenticated)
+  }, [ isAuthenticated]);
 
   return (
     <AuthContext.Provider
