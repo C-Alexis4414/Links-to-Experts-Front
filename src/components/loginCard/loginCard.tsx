@@ -29,11 +29,13 @@ const loginCard = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100px',
+                maxHeight: '900px',
+                width: '300px',
+                backgroundColor: 'blue',
 
             }}
         >
-            <Card>
+            <Card sx={{ maxWidth: 500, width: '100%', bgcolor: '#fef7ff', boxShadow: '0px 0px 6px' }}>
                 <CardContent>
                     <Grid container spacing={2}>
                         <Grid size={12}>
