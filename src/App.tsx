@@ -5,26 +5,33 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './components/privateRoute';
+import Profile from './pages/profile';
 
 function App() {
-  // return (
-  //   <RootLayout>
-  //     <Navbar />
-  //     <HomePage />
-  //   </RootLayout>
-  // );
   return (
-  <RootLayout>
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={ <HomePage />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </RootLayout>
+    <AuthProvider>
+      <RootLayout>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={ <HomePage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="*" element={<PageNotFound />} />
+            {/* <Route 
+              path="profile" 
+              element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+              }
+            /> */}
+          </Routes>
+        </BrowserRouter>
+      </RootLayout>
+    </AuthProvider>
   );
 }
 
