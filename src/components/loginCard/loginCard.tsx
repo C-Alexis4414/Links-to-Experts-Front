@@ -31,8 +31,6 @@ const loginCard = () => {
                 alignItems: 'center',
                 maxHeight: '900px',
                 width: '300px',
-                backgroundColor: 'blue',
-
             }}
         >
             <Card sx={{ maxWidth: 500, width: '100%', bgcolor: '#fef7ff', boxShadow: '0px 0px 6px' }}>

@@ -11,7 +11,7 @@ const passwordRegexRules = [
   { regex: /^(?=.*[a-z])/, message: 'Doit contenir au moins une lettre minuscule.' },
   { regex: /^(?=.*[A-Z])/, message: 'Doit contenir au moins une lettre majuscule.' },
   { regex: /^(?=.*\d)/, message: 'Doit contenir au moins un chiffre.' },
-  { regex: /^(?=.*[!@#$%^&*(),.?":{}|<>])/, message: 'Doit contenir au moins un caractère spécial (ex: ?.!§¨).' },
+  { regex: /^(?=.*[!@#$%^&*(),.?":{}|<>-])/, message: 'Doit contenir au moins un caractère spécial (ex: ?.!§¨).' },
   { regex: /^.{8,}$/, message: 'Doit contenir au moins 8 caractères.' }
 ];
 
