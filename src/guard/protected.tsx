@@ -23,7 +23,8 @@ export const Protected: React.FC<GuardProps> = ({ children }) => {
     navigate('/login');
     return null; // Empêche le rendu du composant tant que la redirection n'est pas effectuée
   }
-
+  console.log('protection');
+  
   // Si l'utilisateur est authentifié, rend les enfants
   return <>{children}</>;
 };

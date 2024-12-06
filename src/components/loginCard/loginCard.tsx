@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid2';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { useNavigate } from 'react-router-dom';
 
-const loginCard = () => {
+const LoginCard = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -31,8 +31,6 @@ const loginCard = () => {
                 alignItems: 'center',
                 maxHeight: '900px',
                 width: '300px',
-                backgroundColor: 'blue',
-
             }}
         >
             <Card sx={{ maxWidth: 500, width: '100%', bgcolor: '#fef7ff', boxShadow: '0px 0px 6px' }}>
@@ -99,4 +97,4 @@ const loginCard = () => {
     );
 };
 
-export default loginCard
+export default LoginCard

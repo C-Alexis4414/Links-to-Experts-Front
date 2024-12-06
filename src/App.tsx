@@ -7,6 +7,8 @@ import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
 import { AuthProvider } from './context/AuthContext';
 import TestPage from './pages/testPage';
+import { Protected } from './guard/protected';
+import Dashboard from './pages/dashboard';
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
             <Route path="/" element={ <HomePage />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="dashboard" element={<Protected>
+              <Dashboard />
+            </Protected>} />
             <Route path="*" element={<PageNotFound />} />
             <Route path="/test" element={<TestPage />} />
           </Routes>
