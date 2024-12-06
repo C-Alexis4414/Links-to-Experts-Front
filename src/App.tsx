@@ -6,8 +6,8 @@ import Login from './pages/login';
 import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
 import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './components/privateRoute';
-import Profile from './pages/profile';
+import { Protected } from './guard/protected';
+import Dashboard from './pages/dashboard';
 
 function App() {
   return (
@@ -19,15 +19,10 @@ function App() {
             <Route path="/" element={ <HomePage />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="dashboard" element={<Protected>
+              <Dashboard />
+            </Protected>} />
             <Route path="*" element={<PageNotFound />} />
-            {/* <Route 
-              path="profile" 
-              element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-              }
-            /> */}
           </Routes>
         </BrowserRouter>
       </RootLayout>
