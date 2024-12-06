@@ -16,7 +16,7 @@ const LoginCard = () => {
         e.preventDefault();
         try {
             await login(email, password);
-            navigate("/");
+            navigate("/")
         } catch (err) {
             setError("Invalid credentials");
             console.log(err);
@@ -98,3 +98,4 @@ const LoginCard = () => {
 };
 
 export default LoginCard
+

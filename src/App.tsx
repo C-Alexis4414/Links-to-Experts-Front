@@ -6,7 +6,6 @@ import Login from './pages/login';
 import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
 import { AuthProvider } from './context/AuthContext';
-import TestPage from './pages/testPage';
 import { Protected } from './guard/protected';
 import Dashboard from './pages/dashboard';
 
@@ -24,7 +23,6 @@ function App() {
               <Dashboard />
             </Protected>} />
             <Route path="*" element={<PageNotFound />} />
-            <Route path="/test" element={<TestPage />} />
           </Routes>
         </BrowserRouter>
       </RootLayout>

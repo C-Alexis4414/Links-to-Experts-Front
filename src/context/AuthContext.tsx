@@ -1,8 +1,6 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import axiosInstance from '../utils/axiosConfig';
-// import { useNavigate } from 'react-router-dom';
 
-//toto
 interface AuthContextType {
   isAuthenticated: boolean; // boolean qui indique si l'utilisateur est authentifié
   checkAuthentication: () => Promise<void>; // fonction qui va vérifier si le user est authentifié
@@ -23,7 +21,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const navigate = useNavigate();
 
   const checkAuthentication = async () => {
     try {
@@ -74,8 +71,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     checkAuthentication();
-    console.log(user)
-    console.log(isAuthenticated)
   }, [ isAuthenticated]);
 
   return (
