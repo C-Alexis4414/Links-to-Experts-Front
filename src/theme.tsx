@@ -79,7 +79,7 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-           border: '2px solid #341C1C'
+          border: '2px solid #341C1C'
         },
       },
     },
@@ -123,7 +123,30 @@ const theme = createTheme({
         },
       ],
     },
-    
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          //  width: '280px',
+          //  height: '51px'
+        },
+      },
+      variants: [
+        {
+          props: { variant: 'outlined' },
+          style: ({ theme }) => ({
+            backgroundColor: '#f7f1f1', // Couleur de fond
+            width: '250px', // Largeur de la carte
+            height: '80px', // Hauteur de la carte
+            '&:hover': {
+              backgroundColor: theme.palette.secondary.dark, // Changer la couleur au survol
+              // boxShadow: '0 6px 8px rgba(0, 0, 0, 0.2)',
+            },
+          }),
+        },
+      ],
+    }
   },
 });
 
