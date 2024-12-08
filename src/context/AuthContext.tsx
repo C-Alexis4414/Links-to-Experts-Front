@@ -8,13 +8,27 @@ interface AuthContextType {
   logout: () => Promise<void>; // fonction pour se déconnecter
   isLoading: boolean; // boolean qui indique si le chargement est en cours ou non
   deleteUser: () => Promise<void>; // fonction pour supprimer le compte utilisateur
-  user: { userName: string } | null; // Propriété userName ajoutée à l'état user
+  user: { userName: string, is_Youtuber: boolean, is_Professional: boolean, youtuber: YoutuberType, professional: ProfessionalType } | null; // Propriété userName ajoutée à l'état user
 }
 
 type UserType = {
   id: number;
   email: string;
   userName: string;
+  is_Youtuber: boolean;
+  is_Professional: boolean;
+  youtuber: YoutuberType;
+  professional: ProfessionalType;
+};
+
+type YoutuberType = {
+  userId: number;
+  tagChannel: string;
+};
+
+type ProfessionalType = {
+  userId: number;
+  urlLinkedin: string;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

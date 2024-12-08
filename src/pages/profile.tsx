@@ -3,6 +3,7 @@ import { Button, Box } from '@mui/material'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Grid from '@mui/material/Grid2';
+import UserInfoCard from '../components/userInfoCard/userInfoCard';
 
 const Profile = () => {
     const [error, setError] = useState<string | null>(null);
@@ -30,6 +31,9 @@ const Profile = () => {
             }}
         >
             <Grid container spacing={2}>
+                <Grid size={12}>
+                    <UserInfoCard />
+                </Grid>
                 <Grid size={12}>
                     <Button 
                         type='submit' 

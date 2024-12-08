@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 import { Protected } from './guard/protected';
 import Dashboard from './pages/dashboard';
 import Profile from './pages/profile';
+import Edit from './pages/edit';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="profile" element={<Protected>
               <Profile />
+            </Protected>} />
+            <Route path="profile/edit" element={<Protected>
+              <Edit />
             </Protected>} />
             <Route path="dashboard" element={<Protected>
               <Dashboard />
