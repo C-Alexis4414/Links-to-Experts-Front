@@ -28,7 +28,7 @@ const navItemAuthenticated = [
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { logout, isAuthenticated } = useAuth();  
+  const { logout, isAuthenticated, user } = useAuth();  
   const navigate = useNavigate()
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -68,6 +68,8 @@ function Navbar() {
 
   const navItem = isAuthenticated ? navItemAuthenticated : navItemUnauthenticated;
 
+  const userInitial = user?.userName?.charAt(0).toUpperCase() || '';
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -103,7 +105,9 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Ouvrir les paramètres">
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar alt="photo de profil" src="" />
+                <Avatar alt={user?.userName} src="">
+                  {userInitial}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu

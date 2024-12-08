@@ -8,6 +8,7 @@ interface AuthContextType {
   logout: () => Promise<void>; // fonction pour se déconnecter
   isLoading: boolean; // boolean qui indique si le chargement est en cours ou non
   deleteUser: () => Promise<void>; // fonction pour supprimer le compte utilisateur
+  user: { userName: string } | null; // Propriété userName ajoutée à l'état user
 }
 
 type UserType = {
@@ -90,7 +91,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, checkAuthentication, login, logout, isLoading, deleteUser }}
+      value={{ isAuthenticated, checkAuthentication, login, logout, isLoading, deleteUser, user }}
     >
       {children}
     </AuthContext.Provider>
