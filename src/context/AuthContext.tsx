@@ -7,6 +7,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>; // fonction pour se connecter
   logout: () => Promise<void>; // fonction pour se déconnecter
   isLoading: boolean; // boolean qui indique si le chargement est en cours ou non
+  deleteUser: () => Promise<void>; // fonction pour supprimer le compte utilisateur
 }
 
 type UserType = {
@@ -69,13 +70,27 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  const deleteUser = async () => {
+    try {
+      setIsLoading(true);
+      if (!user?.id) throw new Error('No user ID avalaible');
+      await axiosInstance.delete(`/user/deleteById/${user.id}`);
+      setIsAuthenticated(false);
+      setUser(null);
+    } catch (error) {
+      console.error('Delete account failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     checkAuthentication();
   }, [ isAuthenticated]);
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, checkAuthentication, login, logout, isLoading }}
+      value={{ isAuthenticated, checkAuthentication, login, logout, isLoading, deleteUser }}
     >
       {children}
     </AuthContext.Provider>

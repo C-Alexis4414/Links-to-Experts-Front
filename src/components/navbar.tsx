@@ -12,17 +12,23 @@ enum NavAction {
   HOME = 'home',
   LOGIN = 'login',
   SIGNUP = 'signup',
+  PROFILE = 'profile',
 }
-const navItem = [
+const navItemUnauthenticated = [
   { path: '/login', label: 'Login', action: NavAction.LOGIN },
   { path: '/register', label: 'Sign up', action: NavAction.SIGNUP },
   { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
+];
+
+const navItemAuthenticated = [
+  { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
   { path: '/logout', label: 'Déconnexion', icon: <LogoutTwoToneIcon />, action: NavAction.LOGOUT },
+  { path: '/profile', label: 'profile', action: NavAction.PROFILE },
 ];
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { logout } = useAuth();  
+  const { logout, isAuthenticated } = useAuth();  
   const navigate = useNavigate()
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -46,6 +52,9 @@ function Navbar() {
     [NavAction.SIGNUP]: () => {
       navigate('/register');
     },
+    [NavAction.PROFILE]: () => {
+      navigate('/profile');
+    },
   };
 
   // Gestion de l'action dynamique en fonction de l'item
@@ -57,10 +66,12 @@ function Navbar() {
     handleCloseUserMenu();  // Fermer le menu après l'action
   };
 
+  const navItem = isAuthenticated ? navItemAuthenticated : navItemUnauthenticated;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
           {/* Menu Burger */}
           <IconButton
             size="large"
@@ -73,18 +84,20 @@ function Navbar() {
           </IconButton>
 
           {/* Icône de paramètres */}
-          <Tooltip title="Ouvrir les paramètres">
-            <IconButton
-              size="large"
-              edge="end"
-              color="inherit"
-              aria-label="settings"
-              sx={{ ml: 'auto' }}
-              onClick={handleOpenUserMenu}
-            >
-              <SettingsIcon />
-            </IconButton>
-          </Tooltip>
+          {isAuthenticated && (
+            <Tooltip title="Ouvrir les paramètres">
+              <IconButton
+                size="large"
+                edge="end"
+                color="inherit"
+                aria-label="settings"
+                sx={{ ml: 'auto' }}
+                onClick={handleOpenUserMenu}
+              >
+                <SettingsIcon />
+              </IconButton>
+            </Tooltip>
+          )}
 
           {/* Menu utilisateur */}
           <Box sx={{ flexGrow: 0 }}>

@@ -8,6 +8,7 @@ import PageNotFound from './pages/pageNotFound';
 import { AuthProvider } from './context/AuthContext';
 import { Protected } from './guard/protected';
 import Dashboard from './pages/dashboard';
+import Profile from './pages/profile';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
             <Route path="/" element={ <HomePage />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="profile" element={<Protected>
+              <Profile />
+            </Protected>} />
             <Route path="dashboard" element={<Protected>
               <Dashboard />
             </Protected>} />
