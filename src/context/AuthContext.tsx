@@ -89,7 +89,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       setIsLoading(true);
       if (!user?.id) throw new Error('No user ID avalaible');
-      await axiosInstance.delete(`/user/deleteById/${user.id}`);
+      await axiosInstance.delete('/user/deleteUser');
       setIsAuthenticated(false);
       setUser(null);
     } catch (error) {
