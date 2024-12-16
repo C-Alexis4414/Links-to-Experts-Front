@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import axiosInstance from '../utils/axiosConfig';
+import { set } from 'react-hook-form';
 
 interface AuthContextType {
   isAuthenticated: boolean; // boolean qui indique si l'utilisateur est authentifié
@@ -8,7 +9,7 @@ interface AuthContextType {
   logout: () => Promise<void>; // fonction pour se déconnecter
   isLoading: boolean; // boolean qui indique si le chargement est en cours ou non
   deleteUser: () => Promise<void>; // fonction pour supprimer le compte utilisateur
-  user: { userName: string, is_Youtuber: boolean, is_Professional: boolean, youtuber: YoutuberType, professional: ProfessionalType } | null; // Propriété userName ajoutée à l'état user
+  user: { userName: string, email: string, is_Youtuber: boolean, is_Professional: boolean, tagChannel?: string, urlLinkedin?: string } | null; // Propriété userName ajoutée à l'état user
 }
 
 type UserType = {
@@ -17,18 +18,8 @@ type UserType = {
   userName: string;
   is_Youtuber: boolean;
   is_Professional: boolean;
-  youtuber: YoutuberType;
-  professional: ProfessionalType;
-};
-
-type YoutuberType = {
-  userId: number;
-  tagChannel: string;
-};
-
-type ProfessionalType = {
-  userId: number;
-  urlLinkedin: string;
+  tagChannel?: string;
+  urlLinkedin?: string;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -38,13 +29,28 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const getUserInfo = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axiosInstance.get('/user/info');
+      if (response.status === 200) {
+        setUser(response.data);
+      }
+    } catch (error) {
+      console.error('Failed to get user info:', error);
+      setUser(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const checkAuthentication = async () => {
     try {
       setIsLoading(true);
       const response = await axiosInstance.get('/authentication/protected');
       if (response.status === 200) {
         setIsAuthenticated(true);
-        setUser(response.data); // Exemple : définir l'utilisateur à partir de la réponse
+        await getUserInfo();
       }
     } catch (error) {
       setIsAuthenticated(false);
@@ -60,8 +66,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const response = await axiosInstance.post('/authentication/login', { email, password });
       if (response.status === 200) {
         setIsAuthenticated(true);
-        setUser(response.data.user); // Exemple : définir l'utilisateur à partir de la réponse
-        // navigate("/")
+        await getUserInfo();
       }
     } catch (error) {
       setIsAuthenticated(false);
