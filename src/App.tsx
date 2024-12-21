@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/register';
 import PageNotFound from './pages/pageNotFound';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/authContext';
 import { Protected } from './guard/protected';
 import Dashboard from './pages/dashboard';
 import Profile from './pages/profile';

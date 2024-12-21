@@ -4,8 +4,9 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
 import { AppBar, Box, Toolbar, IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, ListItemIcon, ListItemText } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';  // Contexte pour l'authentification
+import { useAuth } from '../context/authContext';  // Contexte pour l'authentification
 import HomeIcon from '@mui/icons-material/Home';
+import { useUserInfo } from '../hooks/userInfo';
 
 enum NavAction {
   LOGOUT = 'logout',
@@ -28,8 +29,9 @@ const navItemAuthenticated = [
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { logout, isAuthenticated, user } = useAuth();  
+  const { logout, isAuthenticated } = useAuth();  
   const navigate = useNavigate()
+  const { userInfo, error } = useUserInfo();
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -68,7 +70,15 @@ function Navbar() {
 
   const navItem = isAuthenticated ? navItemAuthenticated : navItemUnauthenticated;
 
-  const userInitial = user?.userName?.charAt(0).toUpperCase() || '';
+  const userInitial = userInfo?.userName?.charAt(0).toUpperCase() || '';
+
+  if (error) {
+    return <Typography variant="body1" color="error">{error}</Typography>;
+  }
+
+  if (!userInfo) {
+    return <Typography variant="body1">Chargement...</Typography>;
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -105,7 +115,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Ouvrir les paramètres">
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar alt={user?.userName} src="">
+                <Avatar alt={userInfo?.userName} src="">
                   {userInitial}
                 </Avatar>
               </IconButton>
