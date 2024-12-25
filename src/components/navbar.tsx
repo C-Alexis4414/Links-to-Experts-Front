@@ -72,13 +72,13 @@ function Navbar() {
 
   const userInitial = userInfo?.userName?.charAt(0).toUpperCase() || '';
 
-  if (error) {
-    return <Typography variant="body1" color="error">{error}</Typography>;
-  }
+  // if (error) {
+  //   return <Typography variant="body1" color="error">{error}</Typography>;
+  // }
 
-  if (!userInfo) {
-    return <Typography variant="body1">Chargement...</Typography>;
-  }
+  // if (!userInfo) {
+  //   return <Typography variant="body1">Chargement...</Typography>;
+  // }
 
   return (
     <Box sx={{ flexGrow: 1 }}>

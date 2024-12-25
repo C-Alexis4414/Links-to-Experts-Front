@@ -7,7 +7,7 @@ import UserInfoCard from '../components/sections/userSection';
 import { useUserInfo } from '../hooks/userInfo';
 
 const Profile = () => {
-    const [error, setError] = useState<string | null>(null);
+    const [err, setErr] = useState<string | null>(null);
     const { isLoading, deleteUser, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const { userInfo } = useUserInfo();
@@ -18,7 +18,7 @@ const Profile = () => {
             await deleteUser();
             navigate('/');
         } catch (err) {
-            setError("Failed to delete account");
+            setErr("Failed to delete account");
             console.log(err);
         }
     };
@@ -68,7 +68,10 @@ const Profile = () => {
                         </Typography>
                 </Grid>
                 <Grid size={12}>
-                    <UserInfoCard />
+                    <UserInfoCard title="Mes infos"/>
+                </Grid>
+                <Grid size={12}>
+                    <UserInfoCard title="Mes relations"/>
                 </Grid>
                 <Grid size={12} display="flex" justifyContent="center" alignItems="center">
                     <Button 
@@ -84,7 +87,7 @@ const Profile = () => {
                             Delete Account
                         </Button>
                 </Grid>
-                {error && <p>{error}</p>}
+                {err && <p>{err}</p>}
             </Grid>
         </Box>
     )

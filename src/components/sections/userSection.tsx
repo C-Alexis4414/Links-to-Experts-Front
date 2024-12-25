@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Card, CardContent, Typography, Box, IconButton, Tooltip } from '@mui/material'
+import { Card, CardContent, Typography, Box, IconButton, Tooltip, Divider } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/authContext';
 import { useUserInfo } from '@/hooks/userInfo';
 
-const UserInfoCard: React.FC = () => {
+interface UserInfoCardProps {
+    title: string;
+}
+
+const UserInfoCard = ({ title }: UserInfoCardProps) => {
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
     const { userInfo, error } = useUserInfo();
 
-    const handleEditClick = () => {
+    const handleUserFormClick = () => {
         navigate('/profile/edit');
+    };
+
+    const handleSubscriptionsClick = () => {
+        navigate('/profile/subscriptions');
     };
 
     if (error) {
@@ -23,11 +30,12 @@ const UserInfoCard: React.FC = () => {
     }
 
     return (
-        <Card sx={{ maxWidth: 600, margin: 'auto', mt: 4, padding: 2 }}>
+        <Box sx={{ display: 'flex'}}>
+        <Card variant="outlined" sx={{ width: 600, margin: 'auto', mt: 4, padding: 2 }}>
             <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItem: 'center', flexDirection: 'row' }}>
-                <Box>
+            { title == "Mes infos" && <Box>
                     <Typography variant="h5" component="div" gutterBottom>
-                        Mes infos
+                        {title}
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
                         {userInfo.is_Youtuber && 'Youtuber'}
@@ -37,16 +45,38 @@ const UserInfoCard: React.FC = () => {
                         {userInfo.tagChannel && userInfo.urlLinkedin && ' / '}
                         {userInfo.urlLinkedin && ` ${userInfo.urlLinkedin}`}
                     </Typography>
-                </Box>
-                <Box display="flex" alignItems="center">
+                </Box>}
+                { title == "Mes relations" && <Box>
+                    <Typography variant="h5" component="div" gutterBottom>
+                        {title}
+                    </Typography>
+                    <Box sx = {{display: 'flex', flexDirection: 'row'}}>
+                        <Typography variant="body1" color="text.secondary">
+                            {`Abonnés: ${userInfo.followersCount}`}
+                        </Typography>
+                        <Divider orientation="vertical" flexItem aria-hidden = "true" sx = {{mx: 2}}/>
+                        <Typography variant="body1" color="text.secondary">
+                            {`Subscriptions: ${userInfo.subscriptionsCount}`}
+                        </Typography>
+                    </Box>
+                </Box>}
+                { title == "Mes infos" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les infos utilisateur" placement="top">
-                        <IconButton onClick={handleEditClick} color="primary">
+                        <IconButton onClick={handleUserFormClick} color="primary">
                             <EditIcon />
                         </IconButton>
                     </Tooltip>}
-                </Box>
+                </Box>}
+                { title == "Mes relations" && <Box display="flex" alignItems="center">
+                    {isAuthenticated && <Tooltip title="Modifier les infos utilisateur" placement="top">
+                        <IconButton onClick={handleSubscriptionsClick} color="primary">
+                            <EditIcon />
+                        </IconButton>
+                    </Tooltip>}
+                </Box>}
             </CardContent>
         </Card>
+        </Box>
     )
 }
 

@@ -3,7 +3,7 @@ import { UserFields } from '@/types/formValues';
     
 export const getUserInfo = async (): Promise<UserFields> => {
     try {
-        const response = await axiosInstance.get<UserFields>('/user/info');
+        const response = await axiosInstance.get<UserFields>('/user/info', { withCredentials: true });
         return response.data;
     } catch (error: any) {
         console.error('Failed to get user info:', error);
