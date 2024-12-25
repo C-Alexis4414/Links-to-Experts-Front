@@ -55,28 +55,23 @@ const Profile = () => {
                 mt: 5,
             }}
         >
-            <Grid container spacing={2}>
-                <Grid size={12} display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-                        <Avatar alt={userInfo?.userName} src="" sx={{ width: 120, height: 120, fontSize: 96, margin: 1 }}>
-                            {userInitial}
-                        </Avatar>
-                        <Typography variant="h6" component="div">
-                            {`Bonjour ${userInfo?.userName}`}
-                        </Typography>
-                        <Typography variant="body1" component="div">
-                            {userInfo?.email}
-                        </Typography>
+            <Grid container spacing={1.5}>
+                <Grid size={12} display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mb: 3 }}>
+                    <Avatar alt={userInfo?.userName} src="" sx={{ width: 120, height: 120, fontSize: 96, margin: 1 }}>
+                        {userInitial}
+                    </Avatar>
+                    <Typography variant="h6" component="div">
+                        {`Bonjour ${userInfo?.userName}`}
+                    </Typography>
+                    <Typography variant="body1" component="div">
+                        {userInfo?.email}
+                    </Typography>
                 </Grid>
-                <Grid size={12}>
+                <Grid size={12} display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap={1.5}>
                     <UserInfoCard title="Mes infos"/>
-                </Grid>
-                <Grid size={12}>
                     <UserInfoCard title="Mes relations"/>
-                </Grid>
-                <Grid size={12}>
                     <UserInfoCard title="Mes categories"/>
-                </Grid>
-                <Grid size={12} display="flex" justifyContent="center" alignItems="center">
+                    <UserInfoCard title="Mes activités"/>
                     <Button 
                         type='submit' 
                         variant='contained' 
@@ -88,7 +83,7 @@ const Profile = () => {
                         onClick={handleDelete}
                         >
                             Delete Account
-                        </Button>
+                    </Button>
                 </Grid>
                 {err && <p>{err}</p>}
             </Grid>

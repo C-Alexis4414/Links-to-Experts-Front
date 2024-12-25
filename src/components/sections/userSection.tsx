@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Box, IconButton, Tooltip, Divider } from '@mui/material'
+import { Card, CardContent, Typography, Box, IconButton, Tooltip, Divider, Chip } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/authContext';
@@ -35,9 +35,9 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
 
     return (
         <Box sx={{ display: 'flex' }}>
-        <Card variant="outlined" sx={{ width: 600, height: 100, margin: 'auto', mt: 1, padding: 1 }}>
-            <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItem: 'center', flexDirection: 'row', pt: 0.5 }}>
-            { title == "Mes infos" && <Box>
+        <Card variant="outlined" sx={{ width: 600, height: 'auto', margin: 'auto', padding: 0.1 }}>
+            <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItem: 'center', flexDirection: 'row', gap: 2 }}>
+                { title === "Mes infos" && <Box>
                     <Typography variant="h5" component="div" gutterBottom>
                         {title}
                     </Typography>
@@ -50,7 +50,7 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
                         {userInfo.urlLinkedin && ` ${userInfo.urlLinkedin}`}
                     </Typography>
                 </Box>}
-                { title == "Mes relations" && <Box>
+                { title === "Mes relations" && <Box>
                     <Typography variant="h5" component="div" gutterBottom>
                         {title}
                     </Typography>
@@ -64,7 +64,7 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
                         </Typography>
                     </Box>
                 </Box>}
-                { title == "Mes categories" && <Box>
+                { title === "Mes categories" && <Box>
                     <Typography variant="h5" component="div" gutterBottom>
                         {title}
                     </Typography>
@@ -75,23 +75,45 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
                         }
                     </Typography>
                 </Box>}
-                { title == "Mes infos" && <Box display="flex" alignItems="center">
+                { title === "Mes activités" && <Box>
+                    <Typography variant="h5" component="div" gutterBottom>
+                        {title}
+                    </Typography>
+                    <Box sx = {{display: 'flex', flexDirection: 'row'}}>
+                        <Typography variant="body1" color="text.secondary">
+                            Mes contrib pro :
+                        </Typography>
+                        <Divider orientation="vertical" flexItem aria-hidden = "true" sx = {{mx: 2}}/>
+                        <Typography variant="body1" color="text.secondary">
+                            Mes interviews :
+                        </Typography>
+                    </Box>
+                </Box>}
+                { title === "Mes infos" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les infos utilisateur" placement="top">
                         <IconButton onClick={handleUserFormClick} color="primary">
                             <EditIcon />
                         </IconButton>
                     </Tooltip>}
                 </Box>}
-                { title == "Mes relations" && <Box display="flex" alignItems="center">
+                { title === "Mes relations" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les subscriptions" placement="top">
                         <IconButton onClick={handleSubscriptionsClick} color="primary">
                             <EditIcon />
                         </IconButton>
                     </Tooltip>}
                 </Box>}
-                { title == "Mes categories" && <Box display="flex" alignItems="center">
+                { title === "Mes categories" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les catégories" placement="top">
                         <IconButton onClick={handleCategoryClick} color="primary">
+                            <EditIcon />
+                        </IconButton>
+                    </Tooltip>}
+                </Box>}
+                { title === "Mes activités" && <Box display="flex" flexDirection="column" alignItems="center">
+                    <Chip label="Bientôt" color="default" />
+                    {isAuthenticated && <Tooltip title="Modifier les activités" placement="top">
+                        <IconButton disabled onClick={handleCategoryClick} color="primary">
                             <EditIcon />
                         </IconButton>
                     </Tooltip>}

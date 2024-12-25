@@ -7,6 +7,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';  // Contexte pour l'authentification
 import HomeIcon from '@mui/icons-material/Home';
 import { useUserInfo } from '../hooks/userInfo';
+import { WidthFull } from '@mui/icons-material';
 
 enum NavAction {
   LOGOUT = 'logout',
@@ -31,7 +32,7 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const { logout, isAuthenticated } = useAuth();  
   const navigate = useNavigate()
-  const { userInfo, error } = useUserInfo();
+  const { userInfo } = useUserInfo();
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -71,14 +72,6 @@ function Navbar() {
   const navItem = isAuthenticated ? navItemAuthenticated : navItemUnauthenticated;
 
   const userInitial = userInfo?.userName?.charAt(0).toUpperCase() || '';
-
-  // if (error) {
-  //   return <Typography variant="body1" color="error">{error}</Typography>;
-  // }
-
-  // if (!userInfo) {
-  //   return <Typography variant="body1">Chargement...</Typography>;
-  // }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
