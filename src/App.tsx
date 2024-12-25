@@ -11,6 +11,7 @@ import Dashboard from '@/pages/dashboard';
 import Profile from '@/pages/profile';
 import UserForm from '@/pages/userForm';
 import Subscriptions from '@/pages/subscriptions';
+import Categories from '@/pages/categories';
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
             </Protected>} />
             <Route path="profile/subscriptions" element={<Protected>
               <Subscriptions />
+            </Protected>} />
+            <Route path="profile/categories" element={<Protected>
+              <Categories />
             </Protected>} />
             <Route path="dashboard" element={<Protected>
               <Dashboard />

@@ -12,4 +12,5 @@ export type UserFields = {
     urlLinkedin?: string  ;
     followersCount: number ;
     subscriptionsCount: number ;
+    likes: { id: number; name: string }[];
 }

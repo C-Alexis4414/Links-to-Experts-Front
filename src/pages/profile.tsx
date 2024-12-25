@@ -73,6 +73,9 @@ const Profile = () => {
                 <Grid size={12}>
                     <UserInfoCard title="Mes relations"/>
                 </Grid>
+                <Grid size={12}>
+                    <UserInfoCard title="Mes categories"/>
+                </Grid>
                 <Grid size={12} display="flex" justifyContent="center" alignItems="center">
                     <Button 
                         type='submit' 

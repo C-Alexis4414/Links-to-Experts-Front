@@ -21,6 +21,10 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
         navigate('/profile/subscriptions');
     };
 
+    const handleCategoryClick = () => {
+        navigate('/profile/categories');
+    };
+
     if (error) {
         return <Typography variant="body1" color="error">{error}</Typography>;
     }
@@ -30,9 +34,9 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
     }
 
     return (
-        <Box sx={{ display: 'flex'}}>
-        <Card variant="outlined" sx={{ width: 600, margin: 'auto', mt: 4, padding: 2 }}>
-            <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItem: 'center', flexDirection: 'row' }}>
+        <Box sx={{ display: 'flex' }}>
+        <Card variant="outlined" sx={{ width: 600, height: 100, margin: 'auto', mt: 1, padding: 1 }}>
+            <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItem: 'center', flexDirection: 'row', pt: 0.5 }}>
             { title == "Mes infos" && <Box>
                     <Typography variant="h5" component="div" gutterBottom>
                         {title}
@@ -60,6 +64,17 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
                         </Typography>
                     </Box>
                 </Box>}
+                { title == "Mes categories" && <Box>
+                    <Typography variant="h5" component="div" gutterBottom>
+                        {title}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                        {userInfo.likes.length > 0
+                            ? userInfo.likes.map((like) => like.name).join(', ')
+                            : 'Aucune catégorie likée'
+                        }
+                    </Typography>
+                </Box>}
                 { title == "Mes infos" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les infos utilisateur" placement="top">
                         <IconButton onClick={handleUserFormClick} color="primary">
@@ -68,8 +83,15 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
                     </Tooltip>}
                 </Box>}
                 { title == "Mes relations" && <Box display="flex" alignItems="center">
-                    {isAuthenticated && <Tooltip title="Modifier les infos utilisateur" placement="top">
+                    {isAuthenticated && <Tooltip title="Modifier les subscriptions" placement="top">
                         <IconButton onClick={handleSubscriptionsClick} color="primary">
+                            <EditIcon />
+                        </IconButton>
+                    </Tooltip>}
+                </Box>}
+                { title == "Mes categories" && <Box display="flex" alignItems="center">
+                    {isAuthenticated && <Tooltip title="Modifier les catégories" placement="top">
+                        <IconButton onClick={handleCategoryClick} color="primary">
                             <EditIcon />
                         </IconButton>
                     </Tooltip>}
