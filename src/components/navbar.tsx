@@ -74,8 +74,8 @@ function Navbar() {
   const userInitial = userInfo?.userName?.charAt(0).toUpperCase() || '';
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    // <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="fixed" sx={{ width: '100%', left: 0, top: 0, right: 0 }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
           {/* Menu Burger */}
           <IconButton
@@ -143,7 +143,7 @@ function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-    </Box>
+    // </Box>
   );
 }
 
