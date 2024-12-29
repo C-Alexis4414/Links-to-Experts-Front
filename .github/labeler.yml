@@ -5,3 +5,41 @@ taskManagement/ci/cd:
 Documentation:
 - changed-files:
   - any-glob-to-any-file: '**/*.md'
+
+Components:
+- changed-files:
+  - any-glob-to-any-file: 'src/components/**'
+
+Context:
+- changed-files:
+  - any-glob-to-any-file: 'src/context/*'
+
+Hooks:
+- changed-files:
+  - any-glob-to-any-file: 'src/hooks/*'
+
+Pages:
+- changed-files:
+  - any-glob-to-any-file: 'src/pages/*'
+
+Types:
+- changed-files:
+  - any-glob-to-any-file: 'src/types/*'
+
+Utils:
+- changed-files:
+  - any-glob-to-any-file: 'src/utils/*'
+
+Guards:
+- changed-files:
+  - any-glob-to-any-file: 'src/guard/*'
+
+Source:
+- changed-files:
+  - any-glob-to-any-file: 'src/*'
+
+Root:
+- changed-files:
+  - any-glob-to-any-file: '*'
+
+
