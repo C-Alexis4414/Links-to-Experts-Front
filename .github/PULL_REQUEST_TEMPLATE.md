@@ -1,7 +1,3 @@
-# Title
-
----
-
 ## WHAT
 
 What has changed ?
