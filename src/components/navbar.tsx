@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
-import { AppBar, Box, Toolbar, IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, ListItemIcon, ListItemText } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { AppBar, Box, Toolbar, IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, ListItemIcon, ListItemText, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';  // Contexte pour l'authentification
-import HomeIcon from '@mui/icons-material/Home';
 import { useUserInfo } from '../hooks/userInfo';
-import { WidthFull } from '@mui/icons-material';
+import { SettingsGearIcon } from './customIcon/settings-gear';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import { HomeIcon } from './customIcon/home';
+import { LogoutIcon } from './customIcon/logout';
+import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
+import { UserIcon } from './customIcon/user';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 
 enum NavAction {
   LOGOUT = 'logout',
@@ -15,17 +18,19 @@ enum NavAction {
   LOGIN = 'login',
   SIGNUP = 'signup',
   PROFILE = 'profile',
+  DASHBOARD = 'dashboard',
 }
 const navItemUnauthenticated = [
-  { path: '/login', label: 'Login', action: NavAction.LOGIN },
-  { path: '/register', label: 'Sign up', action: NavAction.SIGNUP },
   { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
+  { path: '/login', label: 'Login', icon: <LoginOutlinedIcon />, action: NavAction.LOGIN },
+  { path: '/register', label: 'Sign up', icon: <HowToRegOutlinedIcon />, action: NavAction.SIGNUP },
 ];
 
 const navItemAuthenticated = [
   { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
-  { path: '/logout', label: 'Déconnexion', icon: <LogoutTwoToneIcon />, action: NavAction.LOGOUT },
-  { path: '/profile', label: 'profile', action: NavAction.PROFILE },
+  { path: '/dashboard', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.DASHBOARD },
+  { path: '/profile', label: 'Profile', icon: <UserIcon />, action: NavAction.PROFILE },
+  { path: '/logout', label: 'Déconnexion', icon: <LogoutIcon />, action: NavAction.LOGOUT },
 ];
 
 function Navbar() {
@@ -58,6 +63,9 @@ function Navbar() {
     [NavAction.PROFILE]: () => {
       navigate('/profile');
     },
+    [NavAction.DASHBOARD]: () => {
+      navigate('/dashboard');
+    }
   };
 
   // Gestion de l'action dynamique en fonction de l'item
@@ -80,7 +88,7 @@ function Navbar() {
           {/* Menu Burger */}
           <IconButton
             size="large"
-            edge="start"
+            // edge="start"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
@@ -88,18 +96,23 @@ function Navbar() {
             <MenuIcon />
           </IconButton>
 
+            <Button onClick={() => navigate('/')} sx={{ backgroundColor: 'inherit', boxShadow: 'none', padding: 0, minWidth: 'auto', display: 'inline-flex', '&:hover': { opacity: 0.92, backgroundColor: 'inherit', boxShadow: 'none' } }}>
+              <img src="/src/asset/logo-YouLink.png" alt="Retour à l'accueil" style={{ display: 'inline-block', maxWidth: '100%' }}/>
+            </Button>
+
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {/* Icône de paramètres */}
           {isAuthenticated && (
             <Tooltip title="Ouvrir les paramètres">
               <IconButton
                 size="large"
-                edge="end"
+                // edge="end"
                 color="inherit"
                 aria-label="settings"
                 sx={{ ml: 'auto' }}
                 onClick={handleOpenUserMenu}
               >
-                <SettingsIcon />
+                <SettingsGearIcon />
               </IconButton>
             </Tooltip>
           )}
@@ -140,6 +153,7 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
+          </Box>
           </Box>
         </Toolbar>
       </AppBar>
