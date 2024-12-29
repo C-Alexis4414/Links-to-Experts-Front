@@ -118,7 +118,7 @@ function Navbar() {
           )}
 
           {/* Menu utilisateur */}
-          <Box sx={{ flexGrow: 0 }}>
+          <Box>
             <Tooltip title="Ouvrir les paramètres">
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar alt={userInfo?.userName} src="">

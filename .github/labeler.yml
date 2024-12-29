@@ -42,4 +42,8 @@ Root:
 - changed-files:
   - any-glob-to-any-file: '*'
 
+Assets:
+- changed-files:
+  - any-glob-to-any-file: 'src/asset/*'
+
 

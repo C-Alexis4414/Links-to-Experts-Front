@@ -3,6 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/authContext';
 import { useUserInfo } from '@/hooks/userInfo';
+import { ArrowRightIcon } from '../customIcon/arrow-right';
 
 interface UserInfoCardProps {
     title: string;
@@ -92,21 +93,21 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
                 { title === "Mes infos" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les infos utilisateur" placement="top">
                         <IconButton onClick={handleUserFormClick} color="primary">
-                            <EditIcon />
+                            <ArrowRightIcon />
                         </IconButton>
                     </Tooltip>}
                 </Box>}
                 { title === "Mes relations" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les subscriptions" placement="top">
                         <IconButton onClick={handleSubscriptionsClick} color="primary">
-                            <EditIcon />
+                            <ArrowRightIcon />
                         </IconButton>
                     </Tooltip>}
                 </Box>}
                 { title === "Mes categories" && <Box display="flex" alignItems="center">
                     {isAuthenticated && <Tooltip title="Modifier les catégories" placement="top">
                         <IconButton onClick={handleCategoryClick} color="primary">
-                            <EditIcon />
+                            <ArrowRightIcon />
                         </IconButton>
                     </Tooltip>}
                 </Box>}
@@ -114,7 +115,7 @@ const UserInfoCard = ({ title }: UserInfoCardProps) => {
                     <Chip label="Bientôt" color="default" />
                     {isAuthenticated && <Tooltip title="Modifier les activités" placement="top">
                         <IconButton disabled onClick={handleCategoryClick} color="primary">
-                            <EditIcon />
+                            <ArrowRightIcon />
                         </IconButton>
                     </Tooltip>}
                 </Box>}
