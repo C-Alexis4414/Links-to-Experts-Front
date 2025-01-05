@@ -39,6 +39,10 @@ const theme = createTheme({
       fontSize: '14px',
       fontWeight: 300,
     },
+    h1: {
+      fontSize: '16px',
+      fontWeight: 600,
+    },
   },
   components: {
     MuiTextField: {

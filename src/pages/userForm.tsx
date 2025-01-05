@@ -1,11 +1,18 @@
 import React from 'react'
+import Grid from '@mui/material/Grid2'
+import { Box } from '@mui/material'
+import UserFormCard from '@/components/UserFormCard/userFormCard'
 
-const UserForm = () => {
+const userForm = () => {
     return (
-        <div>
-            <h1>Formulaire de modification des infos utilisateur</h1>
-        </div>
+        <Box  sx={{mt:5, display:'flex', justifyContent:'center', alignItems:'center'}}>
+            <Grid container >
+                <Grid size={12}  >
+                    <UserFormCard />
+                </Grid>
+            </Grid>
+        </Box>  
     )
 }
 
-export default UserForm
+export default userForm

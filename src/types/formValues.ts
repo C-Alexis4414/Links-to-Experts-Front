@@ -3,6 +3,7 @@ export type FormValues={
 }
 
 export type UserFields = {
+    id: number
     userName: string | undefined;
     email: string  | undefined;
     password: string  | undefined;
