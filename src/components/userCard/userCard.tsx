@@ -27,28 +27,18 @@ export default function UserCard({ name, role, avatarSrc }: ProfileCardProps) {
                   <Grid size={5}>
                       {name}
                   </Grid>
-                  <Grid size={5}>
+                  {/* <Grid size={5}>
                       {name}
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Grid>
-              <Grid size={12}>
-                {name}hjkl
-              </Grid>
+              {/* <Grid size={12}>
+                {name}
+              </Grid> */}
             </Grid>
           </Grid>
         </Grid>
     </Box>
-         
-         <Card>
-         <Box sx={{ border:'2px solid blue', width:'100%'}}>
-          <Typography>
-            toto
-          </Typography>
-          </Box>
-          
-         </Card>
-         
     </>
   );
 }

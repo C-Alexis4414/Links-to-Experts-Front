@@ -1,4 +1,4 @@
-import HomePage from '@/pages/homePage';
+import HomePage from '@/pages/dashboard';
 import RootLayout from '@/layout';
 import Navbar from '@/components/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -23,9 +23,9 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/welcome' element={<Public> <WelcomePage/></Public>} />
-            <Route path="/" element={ <HomePage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+            <Route path="/" element={ <Protected><HomePage /></Protected>} />
+            <Route path="login" element={<Public><Login /></Public>} />
+            <Route path="register" element={<Protected><Register /></Protected>} />
             <Route path="profile" element={<Protected>
               <Profile />
             </Protected>} />
