@@ -1,15 +1,17 @@
-import HomePage from './pages/homePage';
-import RootLayout from './layout';
-import Navbar from './components/navbar';
+import HomePage from '@/pages/homePage';
+import RootLayout from '@/layout';
+import Navbar from '@/components/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './pages/login';
-import Register from './pages/register';
-import PageNotFound from './pages/pageNotFound';
-import { AuthProvider } from './context/AuthContext';
-import { Protected } from './guard/protected';
-import Dashboard from './pages/dashboard';
-import Profile from './pages/profile';
-import Edit from './pages/edit';
+import Login from '@/pages/login';
+import Register from '@/pages/register';
+import PageNotFound from '@/pages/pageNotFound';
+import { AuthProvider } from '@/context/authContext';
+import { Protected } from '@/guard/protected';
+import Dashboard from '@/pages/dashboard';
+import Profile from '@/pages/profile';
+import UserForm from '@/pages/userForm';
+import Subscriptions from '@/pages/subscriptions';
+import Categories from '@/pages/categories';
 
 function App() {
   return (
@@ -25,7 +27,13 @@ function App() {
               <Profile />
             </Protected>} />
             <Route path="profile/edit" element={<Protected>
-              <Edit />
+              <UserForm />
+            </Protected>} />
+            <Route path="profile/subscriptions" element={<Protected>
+              <Subscriptions />
+            </Protected>} />
+            <Route path="profile/categories" element={<Protected>
+              <Categories />
             </Protected>} />
             <Route path="dashboard" element={<Protected>
               <Dashboard />

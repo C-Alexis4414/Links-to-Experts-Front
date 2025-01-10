@@ -8,27 +8,13 @@ interface AuthContextType {
   logout: () => Promise<void>; // fonction pour se déconnecter
   isLoading: boolean; // boolean qui indique si le chargement est en cours ou non
   deleteUser: () => Promise<void>; // fonction pour supprimer le compte utilisateur
-  user: { userName: string, is_Youtuber: boolean, is_Professional: boolean, youtuber: YoutuberType, professional: ProfessionalType } | null; // Propriété userName ajoutée à l'état user
+  // user: UserType | null; // Propriété userName ajoutée à l'état user
 }
 
 type UserType = {
   id: number;
   email: string;
   userName: string;
-  is_Youtuber: boolean;
-  is_Professional: boolean;
-  youtuber: YoutuberType;
-  professional: ProfessionalType;
-};
-
-type YoutuberType = {
-  userId: number;
-  tagChannel: string;
-};
-
-type ProfessionalType = {
-  userId: number;
-  urlLinkedin: string;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -41,10 +27,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const checkAuthentication = async () => {
     try {
       setIsLoading(true);
-      const response = await axiosInstance.get('/authentication/protected');
+      const response = await axiosInstance.get<UserType>('/authentication/protected');
       if (response.status === 200) {
         setIsAuthenticated(true);
-        setUser(response.data); // Exemple : définir l'utilisateur à partir de la réponse
+        setUser(response.data);
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
       }
     } catch (error) {
       setIsAuthenticated(false);
@@ -60,8 +49,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const response = await axiosInstance.post('/authentication/login', { email, password });
       if (response.status === 200) {
         setIsAuthenticated(true);
-        setUser(response.data.user); // Exemple : définir l'utilisateur à partir de la réponse
-        // navigate("/")
       }
     } catch (error) {
       setIsAuthenticated(false);
@@ -105,7 +92,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, checkAuthentication, login, logout, isLoading, deleteUser, user }}
+      value={{ isAuthenticated, checkAuthentication, login, logout, isLoading, deleteUser }}
     >
       {children}
     </AuthContext.Provider>

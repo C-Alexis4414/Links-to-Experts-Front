@@ -2,6 +2,7 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
+import { Box, CssBaseline } from '@mui/material';
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -15,7 +16,28 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
         <ThemeProvider theme={theme}>
-          {children}
+          <CssBaseline />
+          <Box 
+            component="main"
+            sx={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              minHeight: '100vh', 
+              paddingTop: '64px',
+              overscrollBehavior: 'none',
+              overflowX: 'hidden',
+              bgcolor: 'background.default',
+              '& body': {
+                margin: 0,
+                padding: 0,
+                minHeight: '100vh',
+                overscrollBehavior: 'none',
+                overflowX: 'hidden'
+              },
+            }}
+          >
+            {children}
+          </Box>
         </ThemeProvider>
   );
 }
