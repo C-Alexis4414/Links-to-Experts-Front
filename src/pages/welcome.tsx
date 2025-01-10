@@ -1,97 +1,54 @@
 import React from "react";
-import {  Box, Button, Container,  Typography,  Stack, Divider } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import Navbar from "../components/navbar";
+import { Typography, Divider, Stack, Box, Button } from "@mui/material";
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const WelcomePage = () => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      {/* Navbar */}
-      <Navbar/>
-      
+    <Box
+      sx={{
+        textAlign: "center",
+        py: 5,
+        px: 2,
+        backgroundColor: "#f9f4f4",
+        minHeight: "100vh",
+      }}
+    >
+      {/* Titre */}
+      <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#4a2c2a" }}>
+        YOULINK
+      </Typography>
 
-      {/* Contenu */}
-      <Box component="main" sx={{ flexGrow: 1 }}>
-        {children}
-      </Box>
-
-      {/* Footer */}
-      <Box
-        component="footer"
+      {/* Ligne avec icône */}
+      <Divider
         sx={{
-          backgroundColor: "#000",
-          py: 3,
+          width: "50%",
+          margin: "auto",
+          my: 3,
+          "&::before, &::after": { borderTop: "1px solid #4a2c2a" },
         }}
       >
-          <Grid container spacing={2} >
-            <Grid >
-              <Button  variant="text">
-                News
-              </Button>
-            </Grid>
-            <Grid >
-              <Button  variant="text">
-                Help
-              </Button>
-            </Grid>
-            <Grid >
-              <Button  variant="text">
-                Contact
-              </Button>
-            </Grid>
-          </Grid>
-          <Box mt={2}>
-            <Button variant="text">
-              Get the App
-            </Button>
-          </Box>
-          <Typography variant="body2" sx={{ mt: 2 }}>
-            &copy; 2024 YOULINK. All rights reserved
-          </Typography>
-      </Box>
+        <span style={{ fontSize: "1.5rem", color: "#4a2c2a" }}>🔗</span>
+      </Divider>
+
+      {/* Texte */}
+      <Typography
+        variant="body1"
+        sx={{
+          color: "#4a2c2a",
+          marginBottom: 4,
+          lineHeight: 1.6,
+        }}
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum urna quis magna lobortis, eget finibus
+        urna vestibulum. Sed nec ex non justo dictum venenatis. Fusce nec purus nec mauris posuere malesuada.
+      </Typography>
+
+      {/* Boutons */}
+      <Stack direction="row" justifyContent="center" spacing={2}>
+        <Button variant="text">Inscription</Button>
+        <Button variant="contained">Connexion</Button>
+      </Stack>
     </Box>
   );
 };
 
-const YouLinkPage: React.FC = () => {
-  return (
-    <Layout>
-      <Container maxWidth="md" sx={{ textAlign: "center", py: 5 }}>
-        <Grid container direction="column" spacing={3} alignItems="center">
-          <Grid >
-            <Typography variant="h4" gutterBottom >
-              YOULINK
-            </Typography>
-          </Grid>
-
-          <Grid >
-            <Divider sx={{ width: "100%" }}>
-              <span >🔗</span>
-            </Divider>
-          </Grid>
-
-          <Grid >
-            <Typography variant="body1" sx={{ mb: 3 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum urna quis magna lobortis, eget
-              finibus urna vestibulum. Sed nec ex non justo dictum venenatis. Fusce nec purus nec mauris posuere
-              malesuada.
-            </Typography>
-          </Grid>
-
-          <Grid >
-            <Stack direction="row" justifyContent="center" spacing={2}>
-              <Button variant="text">
-                Inscription
-              </Button>
-              <Button variant="contained" >
-                Connexion
-              </Button>
-            </Stack>
-          </Grid>
-        </Grid>
-      </Container>
-    </Layout>
-  );
-};
-
-export default YouLinkPage;
+export default WelcomePage;

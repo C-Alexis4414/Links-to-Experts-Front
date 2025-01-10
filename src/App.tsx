@@ -12,15 +12,17 @@ import Profile from '@/pages/profile';
 import UserForm from '@/pages/userForm';
 import Subscriptions from '@/pages/subscriptions';
 import Categories from '@/pages/categories';
+import WelcomePage from './pages/welcome';
+import { Public } from './guard/public';
 
 function App() {
   return (
     <AuthProvider>
       <RootLayout>
         <BrowserRouter>
-          {/* <Navbar /> */}
+          <Navbar />
           <Routes>
-            <Route path='/welcome' element={ <WelcomePage/>} />
+            <Route path='/welcome' element={<Public> <WelcomePage/></Public>} />
             <Route path="/" element={ <HomePage />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
