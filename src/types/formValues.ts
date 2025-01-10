@@ -10,4 +10,7 @@ export type UserFields = {
     tagChannel?: string ;
     is_Professional: boolean ;
     urlLinkedin?: string  ;
+    followersCount: number ;
+    subscriptionsCount: number ;
+    likes: { id: number; name: string }[];
 }

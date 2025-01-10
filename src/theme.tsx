@@ -86,8 +86,11 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#7d5260', // Couleur de fond personnalisée de l'AppBar
+          backgroundColor: 'rgba(125, 82, 96, 0.8)', // Couleur de fond personnalisée de l'AppBar
           color: '#fff0ee', // Couleur du texte de l'AppBar
+          backdropFilter: 'blur(8px)',
+          boxShadow: 'none',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
         },
       },
     },
@@ -147,7 +150,7 @@ const theme = createTheme({
         },
       ],
     }
-  },
+  },    
 });
 
 export default theme;
