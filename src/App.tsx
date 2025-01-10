@@ -18,8 +18,9 @@ function App() {
     <AuthProvider>
       <RootLayout>
         <BrowserRouter>
-          <Navbar />
+          {/* <Navbar /> */}
           <Routes>
+            <Route path='/welcome' element={ <WelcomePage/>} />
             <Route path="/" element={ <HomePage />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
