@@ -21,14 +21,14 @@ enum NavAction {
   DASHBOARD = 'dashboard',
 }
 const navItemUnauthenticated = [
-  { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
+  { path: '/welcome', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
   { path: '/login', label: 'Login', icon: <LoginOutlinedIcon />, action: NavAction.LOGIN },
   { path: '/register', label: 'Sign up', icon: <HowToRegOutlinedIcon />, action: NavAction.SIGNUP },
 ];
 
 const navItemAuthenticated = [
-  { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
-  { path: '/dashboard', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.DASHBOARD },
+  { path: '/welcome', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
+  { path: '/home', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.DASHBOARD },
   { path: '/profile', label: 'Profile', icon: <UserIcon />, action: NavAction.PROFILE },
   { path: '/logout', label: 'Déconnexion', icon: <LogoutIcon />, action: NavAction.LOGOUT },
 ];
@@ -52,7 +52,7 @@ function Navbar() {
       navigate('/');
     },
     [NavAction.HOME]: () => {
-      navigate('/');
+      navigate('/welcome');
     },
     [NavAction.LOGIN]: () => {
       navigate('/login');
@@ -64,7 +64,7 @@ function Navbar() {
       navigate('/profile');
     },
     [NavAction.DASHBOARD]: () => {
-      navigate('/dashboard');
+      navigate('/home');
     }
   };
 
