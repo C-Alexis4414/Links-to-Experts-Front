@@ -57,6 +57,30 @@ const UserFormCard = () => {
                 return acc;
             }, {} as Record<string, string>);
 
+            const emailField = fields.find((field) => field.id === 'email');
+            const userNameField = fields.find((field) => field.id === 'userName');
+
+            if (emailField) {
+                const email = emailField.value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email || !emailRegex.test(email)) {
+                    setSnackbarMessage('Adresse email invalide');
+                    setSnackbarSeverity('error');
+                    setSnackbarOpen(true);
+                    return;
+                }
+            }
+
+            if (userNameField) {
+                const userName = userNameField.value;
+                if (!userName || userName.length > 32) {
+                    setSnackbarMessage('Le nom d\'utilisateur doit être compris entre 1 et 32 caractères');
+                    setSnackbarSeverity('error');
+                    setSnackbarOpen(true);
+                    return;
+                }
+            }
+
             await updateUserInfo(updatedData);
 
             setSnackbarMessage('Informations mises à jour avec succès');
