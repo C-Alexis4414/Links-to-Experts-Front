@@ -1,4 +1,4 @@
-import HomePage from '@/pages/dashboard';
+import HomePage from '@/pages/homePage';
 import RootLayout from '@/layout';
 import Navbar from '@/components/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -7,7 +7,6 @@ import Register from '@/pages/register';
 import PageNotFound from '@/pages/pageNotFound';
 import { AuthProvider } from '@/context/authContext';
 import { Protected } from '@/guard/protected';
-import Dashboard from '@/pages/dashboard';
 import Profile from '@/pages/profile';
 import UserForm from '@/pages/userForm';
 import Subscriptions from '@/pages/subscriptions';
@@ -37,9 +36,6 @@ function App() {
             </Protected>} />
             <Route path="profile/categories" element={<Protected>
               <Categories />
-            </Protected>} />
-            <Route path="dashboard" element={<Protected>
-              <Dashboard />
             </Protected>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

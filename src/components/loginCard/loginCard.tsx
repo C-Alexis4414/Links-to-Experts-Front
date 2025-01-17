@@ -16,7 +16,7 @@ const LoginCard = () => {
         e.preventDefault();
         try {
             await login(email, password);
-            navigate("/profile");
+            navigate("/home");
         } catch (err) {
             setError("Invalid credentials");
             console.log(err);

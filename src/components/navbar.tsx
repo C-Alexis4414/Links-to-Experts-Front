@@ -28,7 +28,7 @@ const navItemUnauthenticated = [
 
 const navItemAuthenticated = [
   { path: '/welcome', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
-  { path: '/home', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.DASHBOARD },
+  { path: '/', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.DASHBOARD },
   { path: '/profile', label: 'Profile', icon: <UserIcon />, action: NavAction.PROFILE },
   { path: '/logout', label: 'Déconnexion', icon: <LogoutIcon />, action: NavAction.LOGOUT },
 ];
@@ -52,7 +52,7 @@ function Navbar() {
       navigate('/');
     },
     [NavAction.HOME]: () => {
-      navigate('/welcome');
+      navigate('/');
     },
     [NavAction.LOGIN]: () => {
       navigate('/login');
@@ -64,7 +64,7 @@ function Navbar() {
       navigate('/profile');
     },
     [NavAction.DASHBOARD]: () => {
-      navigate('/home');
+      navigate('/dashboard');
     }
   };
 
