@@ -19,16 +19,17 @@ enum NavAction {
   SIGNUP = 'signup',
   PROFILE = 'profile',
   DASHBOARD = 'dashboard',
+  WELCOME = 'welcome'
 }
 const navItemUnauthenticated = [
-  { path: '/welcome', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
+  { path: '/welcome', label: 'Welcome', icon: <HomeIcon />, action: NavAction.WELCOME },
   { path: '/login', label: 'Login', icon: <LoginOutlinedIcon />, action: NavAction.LOGIN },
   { path: '/register', label: 'Sign up', icon: <HowToRegOutlinedIcon />, action: NavAction.SIGNUP },
 ];
 
 const navItemAuthenticated = [
-  { path: '/welcome', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
-  { path: '/', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.DASHBOARD },
+  { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
+  // { path: '/', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.HOME },
   { path: '/profile', label: 'Profile', icon: <UserIcon />, action: NavAction.PROFILE },
   { path: '/logout', label: 'Déconnexion', icon: <LogoutIcon />, action: NavAction.LOGOUT },
 ];
@@ -65,7 +66,10 @@ function Navbar() {
     },
     [NavAction.DASHBOARD]: () => {
       navigate('/dashboard');
-    }
+    },
+    [NavAction.WELCOME]: () => {
+      navigate('/welcome');
+    },
   };
 
   // Gestion de l'action dynamique en fonction de l'item
