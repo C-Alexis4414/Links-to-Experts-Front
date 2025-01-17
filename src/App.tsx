@@ -1,4 +1,4 @@
-import HomePage from '@/pages/homePage';
+import HomePage from './pages/homePage';
 import RootLayout from '@/layout';
 import Navbar from '@/components/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';

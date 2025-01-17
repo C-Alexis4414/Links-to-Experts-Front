@@ -11,7 +11,7 @@ interface ProfileCardProps {
 
 export default function UserCard({ name, role, avatarSrc }: ProfileCardProps) {
   return (<>
-    <Box sx={{ backgroundColor: '#f7f1f1', width: '280px',height: '51px', display:'flex', justifyContent:'flex-start',  alignItems:'center'}}>
+    <Box sx={{ backgroundColor: '#f7f1f1', width: '280px',height: '51px', display:'flex', justifyContent:'flex-start',  alignItems:'center', borderRadius: '10px' }}>
         <Grid container spacing={3} sx={{p:1 ,width:'100%',  display:'flex', justifyContent:'flex-start',  alignItems:'center'}}>
           <Grid size={2} sx={{ display:'flex', justifyContent:'flex-start',  alignItems:'center'}}>
             <Avatar 
