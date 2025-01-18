@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '@/context/AuthContext';
 import { Box, Card, TextField, Button, Typography, CardContent } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
@@ -16,7 +16,7 @@ const LoginCard = () => {
         e.preventDefault();
         try {
             await login(email, password);
-            navigate("/profile");
+            navigate("/");
         } catch (err) {
             setError("Invalid credentials");
             console.log(err);
