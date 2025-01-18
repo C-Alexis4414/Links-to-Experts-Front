@@ -143,6 +143,18 @@ export default function SignUpCard() {
                         </IconButton>
                       ),
                     }}
+                  //   slotProps={{
+                  //     input: {
+                     
+                  //     endAdornment: (
+                  //         <InputAdornment position="end">
+                  //             <IconButton onClick={() => toggleEdit(field.id)}>
+                  //                 <EditIcon />
+                  //             </IconButton>
+                  //         </InputAdornment>
+                  //     ),
+                  // }
+                  // }}
                   />
                 </Grid>
                 <Grid size={12}>
