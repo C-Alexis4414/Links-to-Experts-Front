@@ -19,17 +19,17 @@ enum NavAction {
   SIGNUP = 'signup',
   PROFILE = 'profile',
   DASHBOARD = 'dashboard',
-  WELCOME = 'welcome'
+  // NavAction WELCOME removed bacause WelcomPage equals to Home
 }
 const navItemUnauthenticated = [
-  { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.WELCOME },
+  { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
   { path: '/login', label: 'Login', icon: <LoginOutlinedIcon />, action: NavAction.LOGIN },
   { path: '/register', label: 'Sign up', icon: <HowToRegOutlinedIcon />, action: NavAction.SIGNUP },
 ];
 
 const navItemAuthenticated = [
   { path: '/', label: 'Home', icon: <HomeIcon />, action: NavAction.HOME },
-  { path: '/dashboard', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.HOME },
+  { path: '/dashboard', label: 'Dashboard', icon: <DashboardOutlinedIcon />, action: NavAction.DASHBOARD },
   { path: '/profile', label: 'Profile', icon: <UserIcon />, action: NavAction.PROFILE },
   { path: '/logout', label: 'Déconnexion', icon: <LogoutIcon />, action: NavAction.LOGOUT },
 ];
@@ -66,9 +66,6 @@ function Navbar() {
     },
     [NavAction.DASHBOARD]: () => {
       navigate('/dashboard');
-    },
-    [NavAction.WELCOME]: () => {
-      navigate('/welcome');
     },
   };
 

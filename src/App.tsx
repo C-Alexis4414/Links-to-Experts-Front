@@ -25,7 +25,7 @@ function App() {
             <Route path='/' element={<Public> <WelcomePage/></Public>} />
             {/* <Route path="/" element={ <Protected><HomePage /></Protected>} /> The route of the old home page */}
             <Route path="login" element={<Public><Login /></Public>} />
-            <Route path="register" element={<Protected><Register /></Protected>} />
+            <Route path="register" element={<Public><Register /></Public>} />
             <Route path="profile" element={<Protected>
               <Profile />
             </Protected>} />

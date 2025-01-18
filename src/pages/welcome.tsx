@@ -42,7 +42,7 @@ const WelcomePage = () => {
         urna vestibulum. Sed nec ex non justo dictum venenatis. Fusce nec purus nec mauris posuere malesuada.
       </Typography>
 
-      {/* Boutons */}
+      {/* TODO: These buttons should disappear when the user is connected */}
       <Stack direction="row" justifyContent="center" spacing={2}>
         <Button variant="text">Inscription</Button>
         <Button variant="contained">Connexion</Button>
