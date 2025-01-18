@@ -7,6 +7,10 @@ import { Menu, MenuItem } from '@mui/material';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import Register from './register';
 
+/**
+ * This is a test of home page before it was replaced by welcome page
+ * @returns  
+ */
 function HomePage() {
     return (
     <>

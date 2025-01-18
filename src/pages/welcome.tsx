@@ -29,7 +29,7 @@ const WelcomePage = () => {
         <span style={{ fontSize: "1.5rem", color: "#4a2c2a" }}>🔗</span>
       </Divider>
 
-      {/* Texte */}
+      {/* TODO : Replace the lorem ipsum text by a description of the application */}
       <Typography
         variant="body1"
         sx={{

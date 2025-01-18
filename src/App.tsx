@@ -5,15 +5,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from '@/pages/login';
 import Register from '@/pages/register';
 import PageNotFound from '@/pages/pageNotFound';
-import { AuthProvider } from '@/context/authContext';
+import { AuthProvider } from '@/context/AuthContext';
 import { Protected } from '@/guard/protected';
 import Dashboard from '@/pages/dashboard';
 import Profile from '@/pages/profile';
 import UserForm from '@/pages/userForm';
 import Subscriptions from '@/pages/subscriptions';
 import Categories from '@/pages/categories';
-import WelcomePage from './pages/welcome';
-import { Public } from './guard/public';
+import WelcomePage from '@/pages/welcome';
+import { Public } from '@/guard/public';
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path='/welcome' element={<Public> <WelcomePage/></Public>} />
-            <Route path="/" element={ <Protected><HomePage /></Protected>} />
+            <Route path='/' element={<Public> <WelcomePage/></Public>} />
+            {/* <Route path="/" element={ <Protected><HomePage /></Protected>} /> The route of the old home page */}
             <Route path="login" element={<Public><Login /></Public>} />
             <Route path="register" element={<Protected><Register /></Protected>} />
             <Route path="profile" element={<Protected>

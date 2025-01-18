@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Box, Toolbar, IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, ListItemIcon, ListItemText, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';  // Contexte pour l'authentification
-import { useUserInfo } from '../hooks/userInfo';
-import { SettingsGearIcon } from './customIcon/settings-gear';
+import { useAuth } from '@/context/AuthContext';  // Contexte pour l'authentification
+import { useUserInfo } from '@/hooks/userInfo';
+import { SettingsGearIcon } from '@/components/customIcon/settings-gear';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import { HomeIcon } from './customIcon/home';
-import { LogoutIcon } from './customIcon/logout';
+import { HomeIcon } from '@/components/customIcon/home';
+import { LogoutIcon } from '@/components/customIcon/logout';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
-import { UserIcon } from './customIcon/user';
+import { UserIcon } from '@/components/customIcon/user';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 
 enum NavAction {
