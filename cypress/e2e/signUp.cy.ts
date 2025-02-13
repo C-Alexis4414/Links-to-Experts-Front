@@ -1,5 +1,8 @@
 describe('register page', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:5173')
+  beforeEach(() => {
+    cy.visit('/register')
+  })
+  it('Allows users to enter their username', () => {
+    cy.get('[name="user.userName"]').type('testuser')
   })
 })
