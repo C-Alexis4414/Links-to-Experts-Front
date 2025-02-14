@@ -113,6 +113,7 @@ export default function SignUpCard() {
                     {...register('user.userName', { required: 'Le nom d\'utilisateur est requis.' })}
                     error={!!errors.user?.userName}
                     helperText={errors.user?.userName?.message}
+                    inputRef={(input) => input && input.setAttribute('data-testid', 'input-userName')}
                   />
                 </Grid>
                 <Grid size={12}>
@@ -123,6 +124,7 @@ export default function SignUpCard() {
                     {...register('user.email', { required: 'L\'adresse email est requise.' })}
                     error={!!errors?.user?.email}
                     helperText={errors?.user?.email?.message}
+                    inputRef={(input) => input && input.setAttribute('data-testid', 'input-email')}
                   />
                 </Grid>
                 <Grid size={12}>
@@ -133,28 +135,19 @@ export default function SignUpCard() {
                     {...register('user.password', { required: 'Le mot de passe est requis.' })}
                     error={!!errors?.user?.password}
                     helperText={errors?.user?.password?.message}
-                    InputProps={{
-                      endAdornment: (
-                        <IconButton
-                          onClick={() => togglePasswordVisibility('newPassword')}
-                          edge="end"
-                        >
-                          {showPasswords.newPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
+                    inputRef={(input) => input && input.setAttribute('data-testid', 'input-password')}
+                    slotProps={{
+                      input: {
+                    endAdornment: (
+                      <IconButton
+                        onClick={() => togglePasswordVisibility('newPassword')}
+                        edge="end"
+                      >
+                        {showPasswords.newPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
                       ),
-                    }}
-                  //   slotProps={{
-                  //     input: {
-                     
-                  //     endAdornment: (
-                  //         <InputAdornment position="end">
-                  //             <IconButton onClick={() => toggleEdit(field.id)}>
-                  //                 <EditIcon />
-                  //             </IconButton>
-                  //         </InputAdornment>
-                  //     ),
-                  // }
-                  // }}
+                    }
+                  }}
                   />
                 </Grid>
                 <Grid size={12}>
@@ -164,15 +157,18 @@ export default function SignUpCard() {
                     type={showPasswords.confirmPassword ? 'text' : 'password'}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    InputProps={{
-                      endAdornment: (
-                        <IconButton
-                          onClick={() => togglePasswordVisibility('confirmPassword')}
-                          edge="end"
-                        >
-                          {showPasswords.confirmPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      ),
+                    inputRef={(input) => input && input.setAttribute('data-testid', 'input-confirmPassword')}
+                    slotProps={{
+                      input: {
+                        endAdornment: (
+                          <IconButton
+                            onClick={() => togglePasswordVisibility('confirmPassword')}
+                            edge="end"
+                          >
+                            {showPasswords.confirmPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        ),
+                      }
                     }}
                   />
                 </Grid>

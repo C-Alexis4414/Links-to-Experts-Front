@@ -36,12 +36,12 @@
 //   }
 // }
 
-// declare namespace Cypress {
-//     interface Chainable {
-//         getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>
-//     }
-// }
+declare namespace Cypress {
+    interface Chainable {
+        getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>
+    }
+}
 
-// Cypress.Commands.add('getByData', (selector) => {
-//     return cy.get(`[dataTest=${selector}]`)
-// })
+Cypress.Commands.add('getByData', (selector) => {
+    return cy.get(`[data-testid=${selector}]`)
+})
