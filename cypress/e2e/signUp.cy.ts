@@ -2,16 +2,16 @@ describe('register page', () => {
   beforeEach(() => {
     cy.visit('/register')
   })
-  it('Allows users to enter their username', () => {
+  it('Allows users to enter their data', () => {
     cy.getByData('input-userName').type('testuser')
-  })
-  it('Allows users to enter their email', () => {
     cy.getByData('input-email').type('testuser@youlink.com')
-  })
-  it('Allows users to enter their email', () => {
     cy.getByData('input-password').type('SecurePass123!')
-  })
-  it('Allows users to enter their email', () => {
     cy.getByData('input-confirmPassword').type('SecurePass123!')
+    cy.getByData('switch-youtuber').click()
+    cy.getByData('input-tagChannel').type(Cypress.env('youtuberUser'))
+    /* Pending to resolve the registration issue with a professional user
+    cy.getByData('switch-linkedin').click()
+    cy.getByData('input-professionalURL').type(Cypress.env('professionalUser'))*/
+    cy.getByData('submit-button').click()
   })
 })

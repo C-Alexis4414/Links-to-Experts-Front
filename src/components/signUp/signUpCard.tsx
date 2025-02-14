@@ -180,6 +180,7 @@ export default function SignUpCard() {
                       {...register('user.is_Youtuber')}
                       checked={values?.user?.is_Youtuber ?? false}
                       onChange={(event) => setValue('user.is_Youtuber', event.target.checked)}
+                      inputRef={(input) => input && input.setAttribute('data-testid', 'switch-youtuber')}
                     />
                   }
                   label="Êtes-vous YouTuber ?"
@@ -189,6 +190,7 @@ export default function SignUpCard() {
                     fullWidth
                     label="Tag de votre chaîne YouTube"
                     {...register('user.tagChannel')}
+                    inputRef={(input) => input && input.setAttribute('data-testid', 'input-tagChannel')}
                   />
                 )}
                 <FormControlLabel
@@ -197,6 +199,7 @@ export default function SignUpCard() {
                       {...register('user.is_Professional')}
                       checked={values?.user?.is_Professional ?? false}
                       onChange={(event) => setValue('user.is_Professional', event.target.checked)}
+                      inputRef={(input) => input && input.setAttribute('data-testid', 'switch-linkedin')}
                     />
                   }
                   label="Êtes-vous sur LinkedIn ?"
@@ -207,6 +210,7 @@ export default function SignUpCard() {
                   fullWidth
                   label="URL LinkedIn"
                   {...register('user.urlLinkedin')}
+                  inputRef={(input) => input && input.setAttribute('data-testid', 'input-professionalURL')}
                 />
               )}
               {errorMessage && (
@@ -243,6 +247,7 @@ export default function SignUpCard() {
                     sx={{ mt: 3 }}
                     disabled={loading}
                     onClick={onSubmit}
+                    data-testid="submit-button"
                   >
                     {loading ? 'Chargement...' : 'S\'inscrire'}
                   </Button>
