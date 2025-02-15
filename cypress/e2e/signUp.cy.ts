@@ -9,9 +9,8 @@ describe('register page', () => {
     cy.getByData('input-confirmPassword').type('SecurePass123!')
     cy.getByData('switch-youtuber').click()
     cy.getByData('input-tagChannel').type(Cypress.env('youtuberUser'))
-    /* Pending to resolve the registration issue with a professional user
     cy.getByData('switch-linkedin').click()
-    cy.getByData('input-professionalURL').type(Cypress.env('professionalUser'))*/
+    cy.getByData('input-professionalURL').type(Cypress.env('professionalUser'))
     cy.getByData('submit-button').click()
   })
 })
