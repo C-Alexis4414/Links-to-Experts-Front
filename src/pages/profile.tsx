@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Box, Avatar, Typography } from '@mui/material'
-import { useAuth } from '../context/authContext'
+import { useAuth } from '@/context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Grid from '@mui/material/Grid2';
 import UserInfoCard from '../components/sections/userSection';

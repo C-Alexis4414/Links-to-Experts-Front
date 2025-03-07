@@ -1,3 +1,5 @@
+import axiosInstance from '../../src/utils/axiosConfig';
+
 describe('register page', () => {
   beforeEach(() => {
     cy.visit('/register')
@@ -12,5 +14,24 @@ describe('register page', () => {
     cy.getByData('switch-linkedin').click()
     cy.getByData('input-professionalURL').type(Cypress.env('professionalUser'))
     cy.getByData('submit-button').click()
+  })
+
+  afterEach(() =>{
+    axiosInstance.post('/authentication/login', {
+      email: 'testuser@youlink.com',
+      password: 'SecurePass123!'
+    })
+    .then((response) => {
+      expect(response.status).to.eq(200)
+
+      return axiosInstance.delete('/user/deleteUser')
+
+    })
+    .then((response) => {
+      expect(response.status).to.eq(200)
+    })
+    .catch((error) => {
+      cy.log(error)
+    })
   })
 })
