@@ -4,6 +4,7 @@ describe('register page', () => {
   beforeEach(() => {
     cy.visit('/register')
   })
+
   it('Allows users to enter their data', () => {
     cy.getByData('input-userName').type('testuser')
     cy.getByData('input-email').type('testuser@youlink.com')
@@ -14,24 +15,38 @@ describe('register page', () => {
     cy.getByData('switch-linkedin').click()
     cy.getByData('input-professionalURL').type(Cypress.env('professionalUser'))
     cy.getByData('submit-button').click()
+
+    cy.url().should('include', '/')
   })
 
   afterEach(() =>{
-    axiosInstance.post('/authentication/login', {
-      email: 'testuser@youlink.com',
-      password: 'SecurePass123!'
-    })
-    .then((response) => {
-      expect(response.status).to.eq(200)
+    cy.wait(500)
 
-      return axiosInstance.delete('/user/deleteUser')
+    cy.request({
+      method: 'POST',
+      url: `${Cypress.env('urlBackend')}/authentication/login`,
+      body: {
+        email: 'testuser@youlink.com',
+        password: 'SecurePass123!'
+      }
+    }).then((loginResponse) => {
+      expect(loginResponse.status).to.eq(200)
 
-    })
-    .then((response) => {
-      expect(response.status).to.eq(200)
-    })
-    .catch((error) => {
-      cy.log(error)
+      const token = loginResponse.body.accessToken
+      cy.wrap(token).as('authToken')
+
+      cy.request({
+        method: 'DELETE',
+        url: `${Cypress.env('urlBackend')}/user/deleteUser`,
+        // body: { username: 'testuser' },
+        headers: { 
+          // 'X-Test-Mode': 'true',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then((deleteResponse) => {
+        expect(deleteResponse.status).to.eq(200)
+      })
     })
   })
 })
