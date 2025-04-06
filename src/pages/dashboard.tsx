@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Button, Avatar } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import UserCard from "@/components/userCard/userCard";
+import axiosInstance from "@/utils/axiosConfig";
+import SearchIcon from '@mui/icons-material/Search';
 
 const HomePage = () => {
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState<{ 
+    userName: string; 
+    is_Youtuber?: boolean; 
+    is_Professional?: boolean; 
+    youtuber?: { tagChannel?: string }; 
+    professional?: { urlLinkedin?: string }; 
+  }[]>([]);
+
+  const handleSearch = async () => {
+    if (!search.trim()) return;
+    try {
+      const { data } = await axiosInstance.get(`user/search?name=${encodeURIComponent(search)}`);
+      setResults(data);
+    } catch (err) {
+      console.error("Search error :", err);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -34,7 +61,24 @@ const HomePage = () => {
               py: 1,
             }}
           >
-            {/* <Button
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Entrez un nom"
+              style={{
+                border: "none",
+                outline: "none",
+                flex: 1,
+                fontSize: "16px",
+              }}
+            />
+            <Button variant="text" onClick={handleSearch}>🔍</Button>
+          </Box>
+
+          {/* Filtres */}
+          <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
+          <Button
               variant="contained"
               sx={{
                 minWidth: "40px",
@@ -44,23 +88,9 @@ const HomePage = () => {
                 color: "#fff",
                 mr: 2,
               }}
-            > */}
-              {/* ☰ */}
-            {/* </Button> */}
-            {/* <input
-              placeholder="catégorie name"
-              style={{
-                border: "none",
-                outline: "none",
-                flex: 1,
-                fontSize: "16px",
-              }}
-            /> */}
-            {/* <Button variant="text">🔍</Button> */}
-          </Box>
-
-          {/* Filtres */}
-          <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
+            >
+              ☰
+            </Button>
             <Button
               variant="text"
               sx={{
@@ -87,13 +117,21 @@ const HomePage = () => {
 
           {/* Liste de cartes */}
           <Grid container spacing={2}>
-            <Grid  size={12}>
-              <UserCard
-                name="Dr. Randy Wigham"
-                role="General Medical Checkup"
-                avatarSrc="https://via.placeholder.com/24"
-              />
-            </Grid>
+            {results.map((user, idx) => (
+              <Grid  size={12}>
+                <UserCard
+                  name={user.userName}
+                  role={
+                    user.is_Youtuber
+                      ? `YouTuber - ${user.youtuber?.tagChannel || "N/A"}`
+                      : user.is_Professional
+                      ? `Professional - ${user.professional?.urlLinkedin || "N/A"}`
+                      : "Utilisateur"
+                  }
+                  avatarSrc="https://via.placeholder.com/24"
+                />
+              </Grid>
+            ))}
             <Grid  size={12}>
               <UserCard
                 name="Gianni Accardi"

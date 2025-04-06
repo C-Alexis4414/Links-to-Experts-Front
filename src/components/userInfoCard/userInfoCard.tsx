@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Card, CardContent, Typography, Box, IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosConfig';
 
 const UserInfoCard: React.FC = () => {
-    const { user } = useAuth();
+    const { user } = useAuth() as { user?: { is_Youtuber?: boolean; professional?: boolean } };
     const navigate = useNavigate();
 
     const handleEditClick = () => {

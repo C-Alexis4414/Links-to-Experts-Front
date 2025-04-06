@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Box, IconButton, Tooltip, Divider, Chip } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/authContext';
+import { useAuth } from '@/context/AuthContext';
 import { useUserInfo } from '@/hooks/userInfo';
 import { ArrowRightIcon } from '../customIcon/arrow-right';
 

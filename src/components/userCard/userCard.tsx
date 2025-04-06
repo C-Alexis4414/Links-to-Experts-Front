@@ -27,14 +27,8 @@ export default function UserCard({ name, role, avatarSrc }: ProfileCardProps) {
                   <Grid size={5}>
                       {name}
                   </Grid>
-                  {/* <Grid size={5}>
-                      {name}
-                  </Grid> */}
                 </Grid>
               </Grid>
-              {/* <Grid size={12}>
-                {name}
-              </Grid> */}
             </Grid>
           </Grid>
         </Grid>
