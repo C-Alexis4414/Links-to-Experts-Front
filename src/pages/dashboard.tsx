@@ -4,7 +4,8 @@ import Grid from "@mui/material/Grid2";
 import UserCard from "@/components/userCard/userCard";
 import axiosInstance from "@/utils/axiosConfig";
 import SearchIcon from '@mui/icons-material/Search';
-import NewCategoryModal from "@/components/NewCategoryModal/newCategoryModal";
+import NewCategoryModal from "@/components/Modal/newCategoryModal";
+import NewTagModal from "@/components/Modal/NewTagModal";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
@@ -18,6 +19,7 @@ const HomePage = () => {
     isFollowed?: boolean;
   }[]>([]);
   const [openModal, setOpenModal] = useState(false);
+  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
 
   const handleSearch = async () => {
     if (!search.trim()) return;
@@ -158,13 +160,13 @@ const HomePage = () => {
         {/* Colonne de droite */}
         <Grid size ={6}>
           <Box>
-            <Typography
-              variant="h6"
-              sx={{ mb: 2, fontWeight: "bold", color: "#4a2c2a" }}
-            >
-              Nouvelles catégories 🌌
-            </Typography>
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
+              <Typography
+                variant="h6"
+                sx={{ mb: 2, fontWeight: "bold", color: "#4a2c2a" }}
+              >
+                Nouvelles catégories 🌌
+              </Typography>
               <Button
                 variant="contained"
                 sx={{ borderRadius: "20px", px: 3 }}
@@ -198,12 +200,26 @@ const HomePage = () => {
               </Button>
             </Box>
 
-            <Typography
-              variant="h6"
-              sx={{ mb: 2, fontWeight: "bold", color: "#4a2c2a" }}
-            >
-              Nouveaux tags ⭐
-            </Typography>
+            <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
+              <Typography
+                variant="h6"
+                sx={{ mb: 2, fontWeight: "bold", color: "#4a2c2a" }}
+              >
+                Nouveaux tags ⭐
+              </Typography>
+              <Button
+                onClick={() => setIsTagModalOpen(true)}
+                variant="contained"
+                sx={{
+                  backgroundColor: "#a60000",
+                  borderRadius: "20px",
+                  px: 3,
+                  color: "white",
+                }}
+              >
+                + Nouveau
+              </Button>
+            </Box>
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
               {[...Array(3)].map((_, i) => (
                 <Button
@@ -247,6 +263,13 @@ const HomePage = () => {
           <NewCategoryModal
             open={openModal}
             onClose={() => setOpenModal(false)}
+          />
+          <NewTagModal
+            open={isTagModalOpen}
+            onClose={() => setIsTagModalOpen(false)}
+            onSuccess={() => {
+              setIsTagModalOpen(false);
+            }}
           />            
         </Grid>
       </Grid>
