@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid2";
 import UserCard from "@/components/userCard/userCard";
 import axiosInstance from "@/utils/axiosConfig";
 import SearchIcon from '@mui/icons-material/Search';
+import NewCategoryModal from "@/components/NewCategoryModal/newCategoryModal";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
@@ -16,6 +17,7 @@ const HomePage = () => {
     professional?: { urlLinkedin?: string }; 
     isFollowed?: boolean;
   }[]>([]);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleSearch = async () => {
     if (!search.trim()) return;
@@ -160,8 +162,17 @@ const HomePage = () => {
               variant="h6"
               sx={{ mb: 2, fontWeight: "bold", color: "#4a2c2a" }}
             >
-              Notre sélection ♡
+              Nouvelles catégories 🌌
             </Typography>
+            <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
+              <Button
+                variant="contained"
+                sx={{ borderRadius: "20px", px: 3 }}
+                onClick={() => setOpenModal(true)}
+              >
+                + Nouveau
+              </Button>
+            </Box>
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
               <Button
                 variant="text"
@@ -185,24 +196,13 @@ const HomePage = () => {
               >
                 Nature
               </Button>
-              <Button
-                variant="text"
-                sx={{
-                  border: "1px solid #4a2c2a",
-                  borderRadius: "20px",
-                  px: 3,
-                  color: "#4a2c2a",
-                }}
-              >
-                Nature
-              </Button>
             </Box>
 
             <Typography
               variant="h6"
               sx={{ mb: 2, fontWeight: "bold", color: "#4a2c2a" }}
             >
-              Nouveaux tags 💡
+              Nouveaux tags ⭐
             </Typography>
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
               {[...Array(3)].map((_, i) => (
@@ -221,7 +221,7 @@ const HomePage = () => {
               ))}
             </Box>
 
-            <Typography
+            {/* <Typography
               variant="h6"
               sx={{ mb: 2, fontWeight: "bold", color: "#4a2c2a" }}
             >
@@ -242,8 +242,12 @@ const HomePage = () => {
                   Nature
                 </Button>
               ))}
-            </Box>
+            </Box> */}
           </Box>
+          <NewCategoryModal
+            open={openModal}
+            onClose={() => setOpenModal(false)}
+          />            
         </Grid>
       </Grid>
     </Box>
