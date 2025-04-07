@@ -7,12 +7,14 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState<{ 
+  const [results, setResults] = useState<{
+    id: number;
     userName: string; 
     is_Youtuber?: boolean; 
     is_Professional?: boolean; 
     youtuber?: { tagChannel?: string }; 
     professional?: { urlLinkedin?: string }; 
+    isFollowed?: boolean;
   }[]>([]);
 
   const handleSearch = async () => {
@@ -77,7 +79,7 @@ const HomePage = () => {
           </Box>
 
           {/* Filtres */}
-          <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
+          {/* <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
           <Button
               variant="contained"
               sx={{
@@ -113,7 +115,7 @@ const HomePage = () => {
             >
               Nature
             </Button>
-          </Box>
+          </Box> */}
 
           {/* Liste de cartes */}
           <Grid container spacing={2}>
@@ -129,10 +131,12 @@ const HomePage = () => {
                       : "Utilisateur"
                   }
                   avatarSrc="https://via.placeholder.com/24"
+                  followedUserId={user.id}
+                  isFollowed={user.isFollowed ?? false}
                 />
               </Grid>
             ))}
-            <Grid  size={12}>
+            {/* <Grid  size={12}>
               <UserCard
                 name="Gianni Accardi"
                 role="CTO of this application"
@@ -145,7 +149,7 @@ const HomePage = () => {
                 role="Furious coder"
                 avatarSrc="https://via.placeholder.com/24"
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
 
