@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Button, Avatar } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import UserCard from "@/components/userCard/userCard";
@@ -6,26 +6,37 @@ import axiosInstance from "@/utils/axiosConfig";
 import SearchIcon from '@mui/icons-material/Search';
 import NewCategoryModal from "@/components/Modal/newCategoryModal";
 import NewTagModal from "@/components/Modal/NewTagModal";
+// import { useAuth } from "@/context/AuthContext";
+import CategoryCard from "@/components/cards/categoryCard";
+import TagCard from "@/components/cards/tagCard";
+
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState<{
-    id: number;
-    userName: string; 
-    is_Youtuber?: boolean; 
-    is_Professional?: boolean; 
-    youtuber?: { tagChannel?: string }; 
-    professional?: { urlLinkedin?: string }; 
-    isFollowed?: boolean;
-  }[]>([]);
+  const [userResults, setUserResults] = useState<any[]>([]);
+  const [categoryResults, setCategoryResults] = useState<any[]>([]);
+  const [tagResults, setTagResults] = useState<any[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [isTagModalOpen, setIsTagModalOpen] = useState(false);
+  // const { categories, tags, toggleLike } = useLatest();
+  // const { isAuthenticated, checkAuthentication } = useAuth();
+  // const [loading, setLoading] = useState(false);
+  // const { categories }: { categories: { id: number; name: string; likes?: { userId: number }[] }[] } = useLastCategories();
+  // const { tags }: { tags: { id: number; name: string; likes?: { userId: number }[] }[] } = useLastTags();
+  // const [likedCategories, setLikedCategories] = useState<number[]>([]);
+  // const [likedTags, setLikedTags] = useState<number[]>([]);
 
   const handleSearch = async () => {
     if (!search.trim()) return;
     try {
-      const { data } = await axiosInstance.get(`user/search?name=${encodeURIComponent(search)}`);
-      setResults(data);
+      const [userRes, catRes, tagRes] = await Promise.all([
+        axiosInstance.get(`user/search?name=${encodeURIComponent(search)}`),      
+        axiosInstance.get(`category/search?name=${encodeURIComponent(search)}`),
+        axiosInstance.get(`tags/search?name=${encodeURIComponent(search)}`),
+      ]);
+      setUserResults(userRes.data);
+      setCategoryResults(catRes.data);
+      setTagResults(tagRes.data);
     } catch (err) {
       console.error("Search error :", err);
     }
@@ -36,6 +47,36 @@ const HomePage = () => {
       handleSearch();
     }
   };
+
+  const toggleCategoryLike = async (categoryId: number) => {
+    try {
+      await axiosInstance.put(`/liked/likeOrUnlike/me/${categoryId}`);
+      setCategoryResults((prev) =>
+        prev.map((cat) =>
+          cat.id === categoryId
+            ? { ...cat, isLikedByCurrentUser: !cat.isLikedByCurrentUser }
+            : cat
+        )
+      );
+    } catch (error) {
+      console.error("Erreur lors du toggle like de la catégorie :", error);
+    }
+  };
+  
+  const toggleTagLike = async (tagId: number) => {
+    try {
+      await axiosInstance.put(`/likedTag/likeOrUnlike/me/${tagId}`);
+      setTagResults((prev) =>
+        prev.map((tag) =>
+          tag.id === tagId
+            ? { ...tag, isLikedByCurrentUser: !tag.isLikedByCurrentUser }
+            : tag
+        )
+      );
+    } catch (error) {
+      console.error("Erreur lors du toggle like du tag :", error);
+    }
+  };  
 
   return (
     <Box
@@ -123,7 +164,7 @@ const HomePage = () => {
 
           {/* Liste de cartes */}
           <Grid container spacing={2}>
-            {results.map((user, idx) => (
+            {userResults.map((user, idx) => (
               <Grid  size={12}>
                 <UserCard
                   name={user.userName}
@@ -137,6 +178,28 @@ const HomePage = () => {
                   avatarSrc="https://via.placeholder.com/24"
                   followedUserId={user.id}
                   isFollowed={user.isFollowed ?? false}
+                />
+              </Grid>
+            ))}
+
+            {categoryResults.map((cat) => (
+              <Grid size={12}>
+                <CategoryCard
+                  id={cat.id}
+                  name={cat.name}
+                  isLiked={cat.isLikedByCurrentUser}
+                  onToggleLike={() => toggleCategoryLike(cat.id)}
+                />
+              </Grid>
+            ))}
+
+            {tagResults.map((tag) => (
+              <Grid size={12}>
+                <TagCard
+                  id={tag.id}
+                  name={tag.name}
+                  isLiked={tag.isLikedByCurrentUser}
+                  onToggleLike={() => toggleTagLike(tag.id)}
                 />
               </Grid>
             ))}
@@ -175,19 +238,16 @@ const HomePage = () => {
                 + Nouveau
               </Button>
             </Box>
-            <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
-              <Button
-                variant="text"
-                sx={{
-                  border: "1px solid #4a2c2a",
-                  borderRadius: "20px",
-                  px: 3,
-                  color: "#4a2c2a",
-                }}
-              >
-                tags
-              </Button>
-              <Button
+            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mb: 3 }}>
+              {/* {categories.map((cat) => (
+                <LikeableButton
+                  key={cat.id}
+                  label={cat.name}
+                  liked={cat.isLikedByCurrentUser}
+                  onToggleLike={() => toggleLike("category", cat.id)}
+                />
+              ))}             */}
+              {/* <Button
                 variant="text"
                 sx={{
                   border: "1px solid #4a2c2a",
@@ -197,7 +257,7 @@ const HomePage = () => {
                 }}
               >
                 Nature
-              </Button>
+              </Button> */}
             </Box>
 
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
@@ -211,7 +271,6 @@ const HomePage = () => {
                 onClick={() => setIsTagModalOpen(true)}
                 variant="contained"
                 sx={{
-                  backgroundColor: "#a60000",
                   borderRadius: "20px",
                   px: 3,
                   color: "white",
@@ -220,22 +279,16 @@ const HomePage = () => {
                 + Nouveau
               </Button>
             </Box>
-            <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 3 }}>
-              {[...Array(3)].map((_, i) => (
-                <Button
-                  key={i}
-                  variant="text"
-                  sx={{
-                    border: "1px solid #4a2c2a",
-                    borderRadius: "20px",
-                    px: 3,
-                    color: "#4a2c2a",
-                  }}
-                >
-                  Nature
-                </Button>
-              ))}
-            </Box>
+            {/* <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mb: 3 }}>
+              {tags.map((tag) => (
+                <LikeableButton
+                  key={tag.id}
+                  label={tag.name}
+                  liked={tag.isLikedByCurrentUser}
+                  onToggleLike={() => toggleLike("tag", tag.id)}
+                />
+              ))}            
+            </Box> */}
 
             {/* <Typography
               variant="h6"

@@ -1,4 +1,4 @@
-import Button1 from '../components/button'
+import Button1 from '../components/buttons/connexionButton'
 import { Box } from '@mui/material'
 import React from 'react'
 
