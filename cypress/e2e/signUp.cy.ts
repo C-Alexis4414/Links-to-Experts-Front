@@ -1,5 +1,3 @@
-import axiosInstance from '../../src/utils/axiosConfig';
-
 describe('register page', () => {
   beforeEach(() => {
     cy.visit('/register')
